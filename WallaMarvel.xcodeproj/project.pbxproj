@@ -125,10 +125,10 @@
 			children = (
 				1A0E3A982862F7E200132FCB /* AppDelegate.swift */,
 				1A0E3A9A2862F7E200132FCB /* SceneDelegate.swift */,
-				1A821EC42862FD470024D397 /* List Heroes */,
-				1A821EC52862FD500024D397 /* Detail Heroe */,
-				1A821EC62862FD650024D397 /* Domain */,
-				1A821EC72862FD6E0024D397 /* Data */,
+				1A821ED2286302D40024D397 /* Models */,
+				AD7FA5F72F2AC1A900F22B24 /* Helpers */,
+				AD7FA5F92F2AC20300F22B24 /* Rest */,
+				AD7FA5F82F2AC1E100F22B24 /* Features */,
 				1A0E3AA12862F7E300132FCB /* Assets.xcassets */,
 				1A0E3AA32862F7E300132FCB /* LaunchScreen.storyboard */,
 				1A0E3AA62862F7E300132FCB /* Info.plist */,
@@ -156,11 +156,9 @@
 		1A821EC42862FD470024D397 /* List Heroes */ = {
 			isa = PBXGroup;
 			children = (
-				1A0E3A9C2862F7E200132FCB /* ListHeroesViewController.swift */,
-				1A3B7329286AE195007BF626 /* ListHeroesAdapter.swift */,
-				1A3B7325286ADD1E007BF626 /* ListHeroesTableView.swift */,
-				1A3B7327286ADEE6007BF626 /* ListHeroesTableViewCell.swift */,
-				1A821ED92863096C0024D397 /* ListHeroesPresenter.swift */,
+				1A821EC72862FD6E0024D397 /* Data */,
+				1A821EC62862FD650024D397 /* Domain */,
+				AD7FA5FA2F2AC22800F22B24 /* UI */,
 			);
 			path = "List Heroes";
 			sourceTree = "<group>";
@@ -185,29 +183,18 @@
 			isa = PBXGroup;
 			children = (
 				1A821ED5286305590024D397 /* MarvelDataSource.swift */,
-				1A821EC82862FE3C0024D397 /* APIClient.swift */,
-				1A821ED2286302D40024D397 /* DataModel */,
-				1A821ECA2862FF910024D397 /* Helpers */,
 			);
 			path = Data;
 			sourceTree = "<group>";
 		};
-		1A821ECA2862FF910024D397 /* Helpers */ = {
-			isa = PBXGroup;
-			children = (
-				1A821ECB2862FF990024D397 /* String+MD5.swift */,
-			);
-			path = Helpers;
-			sourceTree = "<group>";
-		};
-		1A821ED2286302D40024D397 /* DataModel */ = {
+		1A821ED2286302D40024D397 /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				1A821ED3286302EC0024D397 /* CharacterResponseDataModel.swift */,
 				1A7B9BBC286D81AA00EBC1A6 /* CharacterDataModel.swift */,
 				1A7B9BBE286D81B600EBC1A6 /* Thumbnail.swift */,
 			);
-			path = DataModel;
+			path = Models;
 			sourceTree = "<group>";
 		};
 		1AC0347D286320F000E93178 /* UseCases */ = {
@@ -216,6 +203,43 @@
 				1AC0347E2863214900E93178 /* GetHeroes.swift */,
 			);
 			path = UseCases;
+			sourceTree = "<group>";
+		};
+		AD7FA5F72F2AC1A900F22B24 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				1A821ECB2862FF990024D397 /* String+MD5.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		AD7FA5F82F2AC1E100F22B24 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				1A821EC42862FD470024D397 /* List Heroes */,
+				1A821EC52862FD500024D397 /* Detail Heroe */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		AD7FA5F92F2AC20300F22B24 /* Rest */ = {
+			isa = PBXGroup;
+			children = (
+				1A821EC82862FE3C0024D397 /* APIClient.swift */,
+			);
+			path = Rest;
+			sourceTree = "<group>";
+		};
+		AD7FA5FA2F2AC22800F22B24 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1A0E3A9C2862F7E200132FCB /* ListHeroesViewController.swift */,
+				1A3B7329286AE195007BF626 /* ListHeroesAdapter.swift */,
+				1A3B7325286ADD1E007BF626 /* ListHeroesTableView.swift */,
+				1A3B7327286ADEE6007BF626 /* ListHeroesTableViewCell.swift */,
+				1A821ED92863096C0024D397 /* ListHeroesPresenter.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
