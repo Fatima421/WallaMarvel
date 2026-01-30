@@ -1,6 +1,6 @@
 import Foundation
 
-struct CharacterDataContainer: Decodable {
+struct CharactersDataModel: Decodable {
     let info: PaginationInfo
     let data: [CharacterDataModel]
 }
