@@ -1,38 +1,26 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func getHeroes(completionBlock: @escaping (CharacterDataContainer) -> Void)
+    func getCharacters(page: Int) async throws -> CharacterDataContainer
+    func getCharacterBy(id: Int) async throws -> CharacterDataModel
 }
 
 final class APIClient: APIClientProtocol {
-    enum Constant {
-        static let privateKey = "188f9a5aa76846d907c41cbea6506e4cc455293f"
-        static let publicKey = "d575c26d5c746f623518e753921ac847"
+    // MARK: - Properties
+    private let restManager: RestManagerProtocol
+
+    // MARK: - Initializer
+    init(restManager: RestManagerProtocol) {
+        self.restManager = restManager
     }
     
-    init() { }
+    func getCharacters(page: Int) async throws -> CharacterDataContainer {
+        let endpoint: Endpoint = .getCharacters(page: page)
+        return try await restManager.request(endpoint: endpoint)
+    }
     
-    func getHeroes(completionBlock: @escaping (CharacterDataContainer) -> Void) {
-        let ts = String(Int(Date().timeIntervalSince1970))
-        let privateKey = Constant.privateKey
-        let publicKey = Constant.publicKey
-        let hash = "\(ts)\(privateKey)\(publicKey)".md5
-        let parameters: [String: String] = ["apikey": publicKey,
-                                            "ts": ts,
-                                            "hash": hash]
-        
-        let endpoint = "https://gateway.marvel.com:443/v1/public/characters"
-        var urlComponent = URLComponents(string: endpoint)
-        urlComponent?.queryItems = parameters.map { (key, value) in
-            URLQueryItem(name: key, value: value)
-        }
-        
-        let urlRequest = URLRequest(url: urlComponent!.url!)
-        
-        URLSession.shared.dataTask(with: urlRequest) { data, response, error in
-            let dataModel = try! JSONDecoder().decode(CharacterDataContainer.self, from: data!)
-            completionBlock(dataModel)
-            print(dataModel)
-        }.resume()
+    func getCharacterBy(id: Int) async throws -> CharacterDataModel {
+        let endpoint: Endpoint = .getCharacterBy(id: id)
+        return try await restManager.request(endpoint: endpoint)
     }
 }
