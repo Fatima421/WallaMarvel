@@ -8,16 +8,42 @@ final class CharacterListViewModel: ObservableObject {
     @Published var isLoading = false
     @Published var isLoadingMore = false
     @Published var errorMessage: String?
-        
+    @Published var searchText: String = ""
+
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
+    private let searchCharactersUseCase: SearchCharactersUseCaseProtocol
     private var currentPage = 1
     private var canLoadMore = true
+    let suggestionsList: [String]
     
     // MARK: - Initializer
     
-    init(getCharactersUseCase: GetCharactersUseCaseProtocol = AppContainer.shared.makeGetCharactersUseCase()) {
+    init(
+        getCharactersUseCase: GetCharactersUseCaseProtocol = AppContainer.shared.makeGetCharactersUseCase(),
+        searchCharactersUseCase: SearchCharactersUseCaseProtocol = AppContainer.shared.makeSearchCharactersUseCase()
+    ) {
         self.getCharactersUseCase = getCharactersUseCase
+        self.searchCharactersUseCase = searchCharactersUseCase
+
+        self.suggestionsList = [
+            "Mickey Mouse",
+            "Barbie",
+            "Elsa",
+            "Simba",
+            "Ariel",
+            "Woody"
+        ]
         
+        Task {
+            await loadCharacters()
+        }
+    }
+    
+    // MARK: - User actions
+    
+    func onSearchTextChanged() {
+        currentPage = 1
+        characters = []
         Task {
             await loadCharacters()
         }
@@ -25,7 +51,7 @@ final class CharacterListViewModel: ObservableObject {
     
     // MARK: - Load data
     
-    private func loadCharacters() async {
+    func loadCharacters() async {
         guard !isLoading else { return }
         
         await MainActor.run { isLoading = true }
@@ -48,7 +74,14 @@ final class CharacterListViewModel: ObservableObject {
     
     private func fetchCharacters() async {
         do {
-            let result = try await getCharactersUseCase.execute(page: currentPage)
+            let result: Characters
+            
+            if !searchText.isEmpty {
+                result = try await searchCharactersUseCase.execute(name: searchText, page: currentPage)
+            } else {
+                result = try await getCharactersUseCase.execute(page: currentPage)
+            }
+            
             await MainActor.run {
                 characters.append(contentsOf: result.data)
                 canLoadMore = result.hasNextPage
