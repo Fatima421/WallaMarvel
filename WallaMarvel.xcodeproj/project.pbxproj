@@ -32,6 +32,7 @@
 		ADD0BAC12F2E23F4000653ED /* WallaMarvelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC02F2E23F4000653ED /* WallaMarvelApp.swift */; };
 		ADD0BAC52F2E9971000653ED /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC42F2E9971000653ED /* ImageView.swift */; };
 		ADD0BAC82F2E9999000653ED /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = ADD0BAC72F2E9999000653ED /* SDWebImageSwiftUI */; };
+		ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,6 +81,7 @@
 		ADD0BAB82F2D791E000653ED /* MockCharacterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCharacterDataSource.swift; sourceTree = "<group>"; };
 		ADD0BAC02F2E23F4000653ED /* WallaMarvelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallaMarvelApp.swift; sourceTree = "<group>"; };
 		ADD0BAC42F2E9971000653ED /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
+		ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		1A821EC52862FD500024D397 /* CharacterDetail */ = {
 			isa = PBXGroup;
 			children = (
+				ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */,
 			);
 			path = CharacterDetail;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				1A821ED82863081A0024D397 /* CharacterRepository.swift in Sources */,
 				1AC0347F2863214900E93178 /* GetCharactersUseCase.swift in Sources */,
 				AD0979192F2D676100D5501A /* CharacterListView.swift in Sources */,
+				ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
 				ADB9BCFD2F2D0FC100E067CA /* RestManager.swift in Sources */,
 				1A821ED6286305590024D397 /* CharacterDataSource.swift in Sources */,

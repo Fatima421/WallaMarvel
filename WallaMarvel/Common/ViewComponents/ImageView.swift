@@ -2,25 +2,34 @@ import SwiftUI
 import SDWebImageSwiftUI
 
 struct ImageView: View {
-    let imageUrl: URL
+    let imageUrl: String?
+    let size: CGFloat
     
     var body: some View {
-        Group {
-            WebImage(url: imageUrl) { image in
+        if let imageUrl, let url = URL(string: imageUrl) {
+            WebImage(url: url) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
+                    .frame(width: size, height: size)
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
             } placeholder: {
-                Image(.imagePlaceholder)
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
+                placeholder
             }
+        } else {
+            placeholder
         }
-        .frame(width: 80, height: 80)
-        .clipShape(RoundedRectangle(cornerRadius: 8))
+    }
+    
+    private var placeholder: some View {
+        Image(.imagePlaceholder)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(width: 80, height: 80)
+            .clipShape(RoundedRectangle(cornerRadius: 8))
     }
 }
 
 #Preview {
-    ImageView(imageUrl: URL(string: "https://picsum.photos/200/300")!)
+    ImageView(imageUrl: "https://picsum.photos/200/300", size: 80)
 }

@@ -5,8 +5,8 @@ struct CharacterListView: View {
         
     var body: some View {
         NavigationStack {
-            List(viewModel.characters, id: \.id) { character in
-                VStack(alignment: .leading) {
+            List(viewModel.characters, id: \.self) { character in
+                NavigationLink(value: character) {
                     row(character)
                         .onAppear {
                             if character.id == viewModel.characters.last?.id {
@@ -18,6 +18,9 @@ struct CharacterListView: View {
                 }
             }
             .navigationTitle("Disney Characters")
+            .navigationDestination(for: Character.self) { character in
+                CharacterDetailView(character: character)
+            }
             .refreshable {
                 await viewModel.refresh()
             }
@@ -40,9 +43,7 @@ struct CharacterListView: View {
     
     private func row(_ character: Character) -> some View {
         HStack(spacing: 12) {
-            if let image = character.imageUrl, let url = URL(string: image) {
-                ImageView(imageUrl: url)
-            }
+            ImageView(imageUrl: character.imageUrl, size: 80)
             
             Text(character.name)
                 .font(.headline)
