@@ -2,15 +2,13 @@ import Foundation
 
 final class CharacterListViewModel: ObservableObject {
     
-    // MARK: - Published Properties
+    // MARK: - Properties
     
     @Published var characters: [Character] = []
     @Published var isLoading = false
     @Published var isLoadingMore = false
     @Published var errorMessage: String?
-    
-    // MARK: - Private Properties
-    
+        
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
     private var currentPage = 1
     private var canLoadMore = true

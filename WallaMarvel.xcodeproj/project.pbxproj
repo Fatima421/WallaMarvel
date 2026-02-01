@@ -34,6 +34,9 @@
 		ADD0BAC82F2E9999000653ED /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = ADD0BAC72F2E9999000653ED /* SDWebImageSwiftUI */; };
 		ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */; };
 		ADD0BACC2F2F8C95000653ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */; };
+		ADD0BACF2F2F8F05000653ED /* SearchCharactersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BACE2F2F8F05000653ED /* SearchCharactersUseCase.swift */; };
+		ADD0BAD22F2F910D000653ED /* SearchCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAD12F2F910D000653ED /* SearchCharacterView.swift */; };
+		ADD0BAD42F2F9181000653ED /* SearchCharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAD32F2F9181000653ED /* SearchCharacterViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +87,9 @@
 		ADD0BAC42F2E9971000653ED /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
 		ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ADD0BACE2F2F8F05000653ED /* SearchCharactersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharactersUseCase.swift; sourceTree = "<group>"; };
+		ADD0BAD12F2F910D000653ED /* SearchCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharacterView.swift; sourceTree = "<group>"; };
+		ADD0BAD32F2F9181000653ED /* SearchCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharacterViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +211,7 @@
 			children = (
 				1AC0347E2863214900E93178 /* GetCharactersUseCase.swift */,
 				AD49409E2F2D60EF0024249A /* GetCharacterUseCase.swift */,
+				ADD0BACE2F2F8F05000653ED /* SearchCharactersUseCase.swift */,
 			);
 			path = UseCases;
 			sourceTree = "<group>";
@@ -216,6 +223,7 @@
 				1A821EC62862FD650024D397 /* Domain */,
 				1A821EC42862FD470024D397 /* CharacterList */,
 				1A821EC52862FD500024D397 /* CharacterDetail */,
+				ADD0BAD02F2F90ED000653ED /* SearchCharacter */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -306,6 +314,15 @@
 				ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */,
 			);
 			path = Splash;
+			sourceTree = "<group>";
+		};
+		ADD0BAD02F2F90ED000653ED /* SearchCharacter */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAD12F2F910D000653ED /* SearchCharacterView.swift */,
+				ADD0BAD32F2F9181000653ED /* SearchCharacterViewModel.swift */,
+			);
+			path = SearchCharacter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -447,17 +464,20 @@
 				ADD0BAC52F2E9971000653ED /* ImageView.swift in Sources */,
 				AD49409C2F2D1DA50024249A /* Characters.swift in Sources */,
 				AD49409D2F2D1DA50024249A /* Character.swift in Sources */,
+				ADD0BAD22F2F910D000653ED /* SearchCharacterView.swift in Sources */,
 				1A821ED82863081A0024D397 /* CharacterRepository.swift in Sources */,
 				1AC0347F2863214900E93178 /* GetCharactersUseCase.swift in Sources */,
 				AD0979192F2D676100D5501A /* CharacterListView.swift in Sources */,
 				ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
+				ADD0BACF2F2F8F05000653ED /* SearchCharactersUseCase.swift in Sources */,
 				ADB9BCFD2F2D0FC100E067CA /* RestManager.swift in Sources */,
 				1A821ED6286305590024D397 /* CharacterDataSource.swift in Sources */,
 				1A821ED4286302EC0024D397 /* CharactersDataModel.swift in Sources */,
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,
 				AD0979172F2D666800D5501A /* CharacterListViewModel.swift in Sources */,
 				AD49409F2F2D60EF0024249A /* GetCharacterUseCase.swift in Sources */,
+				ADD0BAD42F2F9181000653ED /* SearchCharacterViewModel.swift in Sources */,
 				ADD0BAC12F2E23F4000653ED /* WallaMarvelApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -625,7 +645,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -652,7 +672,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -674,7 +694,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallapop.WallaMarvelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -693,7 +713,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallapop.WallaMarvelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";

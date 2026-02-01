@@ -3,6 +3,7 @@ import Foundation
 protocol CharacterRepositoryProtocol {
     func getCharacters(page: Int) async throws -> Characters
     func getCharacterDetail(id: Int) async throws -> Character
+    func searchCharacters(name: String, page: Int) async throws -> Characters
 }
 
 final class CharacterRepository: CharacterRepositoryProtocol {
@@ -27,5 +28,10 @@ final class CharacterRepository: CharacterRepositoryProtocol {
     func getCharacterDetail(id: Int) async throws -> Character {
         let response = try await dataSource.getCharacterBy(id: id)
         return Character(from: response)
+    }
+    
+    func searchCharacters(name: String, page: Int) async throws -> Characters {
+        let response = try await dataSource.searchCharacters(name: name, page: page)
+        return Characters(from: response, currentPage: page)
     }
 }

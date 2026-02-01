@@ -7,10 +7,12 @@ protocol RestManagerProtocol {
 final class RestManager: RestManagerProtocol {
     
     // MARK: - Properties
+    
     private let baseURL: String
     private let session: URLSession
         
     // MARK: - Initializer
+    
     init(baseURL: String = "https://api.disneyapi.dev",
          session: URLSession = .shared) {
         self.baseURL = baseURL
@@ -19,14 +21,30 @@ final class RestManager: RestManagerProtocol {
     
     func request<T: Decodable>(endpoint: Endpoint) async throws -> T {
         guard let url = buildURL(for: endpoint) else {
+            debugPrint("[ERROR] Invalid URL")
             throw NetworkError.invalidURL
         }
         
+        debugPrint("[REQUEST] \(endpoint.method) \(url.absoluteString)")
+        
         let request = buildRequest(url: url, method: endpoint.method)
-        let (data, response) = try await session.data(for: request)
-        try validateResponse(response)
-        return try decode(data: data)
+        
+        do {
+            let (data, response) = try await session.data(for: request)
+            try validateResponse(response)
+            
+            if let json = String(data: data, encoding: .utf8) {
+                debugPrint("[RESPONSE]")
+                debugPrint(json)
+            }
+            
+            return try decode(data: data)
+        } catch {
+            debugPrint("[ERROR] \(error.localizedDescription)")
+            throw error
+        }
     }
+
         
     private func buildURL(for endpoint: Endpoint) -> URL? {
         guard var components = URLComponents(string: baseURL + endpoint.path) else {
@@ -66,24 +84,6 @@ final class RestManager: RestManagerProtocol {
             return try decoder.decode(T.self, from: data)
         } catch {
             throw NetworkError.decodingError
-        }
-    }
-}
-
-extension RestManager {
-    func requestWithLog<T: Decodable>(endpoint: Endpoint) async throws -> T {
-        debugPrint("[REQUEST] \(endpoint.method) \(baseURL)\(endpoint.path)")
-        if let params = endpoint.queryParams {
-            debugPrint("[PARAMS] \(params)")
-        }
-        
-        do {
-            let result: T = try await request(endpoint: endpoint)
-            debugPrint("[SUCCESS] Request completed")
-            return result
-        } catch {
-            debugPrint("[ERROR] \(error.localizedDescription)")
-            throw error
         }
     }
 }

@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CharacterListView: View {
     @StateObject var viewModel: CharacterListViewModel
-        
+    
     var body: some View {
         NavigationStack {
             List(viewModel.characters, id: \.self) { character in
@@ -20,6 +20,12 @@ struct CharacterListView: View {
             .navigationTitle("Disney Characters")
             .navigationDestination(for: Character.self) { character in
                 CharacterDetailView(character: character)
+            }
+            .searchable(text: $viewModel.searchText, prompt: "Search characters...")
+            .onChange(of: viewModel.searchText) {
+                Task {
+                    await viewModel.loadCharacters()
+                }
             }
             .refreshable {
                 await viewModel.refresh()

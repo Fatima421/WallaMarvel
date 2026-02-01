@@ -1,10 +1,9 @@
 import Foundation
 
-// MARK: - Protocol
-
 protocol CharacterDataSourceProtocol {
     func getCharacters(page: Int) async throws -> CharactersDataModel
     func getCharacterBy(id: Int) async throws -> CharacterDataModel
+    func searchCharacters(name: String, page: Int) async throws -> CharactersDataModel
 }
 
 // MARK: - CharacterDataSource
@@ -29,5 +28,9 @@ final class CharacterDataSource: CharacterDataSourceProtocol {
     
     func getCharacterBy(id: Int) async throws -> CharacterDataModel {
         try await apiClient.getCharacterBy(id: id)
+    }
+    
+    func searchCharacters(name: String, page: Int) async throws -> CharactersDataModel {
+        try await apiClient.searchCharacters(name: name, page: page)
     }
 }

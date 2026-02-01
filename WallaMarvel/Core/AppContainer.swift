@@ -36,4 +36,8 @@ final class AppContainer {
     func makeGetCharacterUseCase() -> GetCharacterUseCaseProtocol {
         GetCharacterUseCase(repository: characterRepository)
     }
+    
+    func makeSearchCharactersUseCase() -> SearchCharactersUseCaseProtocol {
+        SearchCharactersUseCase(repository: characterRepository)
+    }
 }
