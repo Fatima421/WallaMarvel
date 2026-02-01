@@ -22,7 +22,7 @@ struct ImageView: View {
     }
     
     private var placeholder: some View {
-        Image(.imagePlaceholder)
+        Image(.placeholder)
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 80, height: 80)

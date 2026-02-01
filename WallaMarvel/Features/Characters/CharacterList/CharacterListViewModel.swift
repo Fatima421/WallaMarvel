@@ -1,13 +1,11 @@
 import Foundation
 
-final class CharacterListViewModel: ObservableObject {
+final class CharacterListViewModel: BaseViewModel {
     
     // MARK: - Properties
     
     @Published var characters: [Character] = []
-    @Published var isLoading = false
     @Published var isLoadingMore = false
-    @Published var errorMessage: String?
     @Published var searchText: String = ""
 
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
@@ -35,6 +33,8 @@ final class CharacterListViewModel: ObservableObject {
             "Woody"
         ]
         
+        super.init()
+        
         Task {
             await loadCharacters()
         }
@@ -44,7 +44,10 @@ final class CharacterListViewModel: ObservableObject {
     
     func onSearchTextChanged() {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
-        guard !trimmed.isEmpty else { return }
+        guard !trimmed.isEmpty else {
+            state = .success
+            return
+        }
         
         debouncer.debounce { [weak self] in
             self?.currentPage = 1
@@ -59,17 +62,19 @@ final class CharacterListViewModel: ObservableObject {
     // MARK: - Load data
     
     func loadCharacters() async {
-        guard !isLoading else { return }
+        guard state != .loading else { return }
         
-        await MainActor.run { isLoading = true }
+        await MainActor.run {
+            if state == .none || state == .success {
+                state = .loading
+            }
+        }
 
         await fetchCharacters()
-
-        await MainActor.run { isLoading = false }
     }
     
     func loadMoreCharacters() async {
-        guard !isLoadingMore, !isLoading, canLoadMore else { return }
+        guard !isLoadingMore, state != .loading, canLoadMore else { return }
         
         await MainActor.run { isLoadingMore = true }
         currentPage += 1
@@ -89,7 +94,9 @@ final class CharacterListViewModel: ObservableObject {
                 result = try await getCharactersUseCase.execute(page: currentPage)
             }
             
+            
             await MainActor.run {
+                state = result.data.isEmpty ? .empty : .success
                 characters.append(contentsOf: result.data)
                 canLoadMore = result.hasNextPage
             }
@@ -99,6 +106,7 @@ final class CharacterListViewModel: ObservableObject {
             }
             await MainActor.run {
                 errorMessage = error.localizedDescription
+                state = .failure
             }
         }
     }

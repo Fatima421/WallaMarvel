@@ -8,6 +8,11 @@ struct CharactersDataModel: Decodable {
         case info, data
     }
     
+    init(info: PaginationInfo, data: [CharacterDataModel]) {
+        self.info = info
+        self.data = data
+    }
+    
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.info = try container.decode(PaginationInfo.self, forKey: .info)

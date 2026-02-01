@@ -6,24 +6,50 @@ struct CharacterListView: View {
 
     var body: some View {
         NavigationStack {
-            if isSearching, viewModel.searchText.isEmpty {
-                suggestionsSection
-            } else {
-                characterList
+            BaseView(
+                viewModel: viewModel,
+                content: { content },
+                loadingView: AnyView(loadingView),
+                emptyView: AnyView(emptyView),
+                errorView: AnyView(errorView)
+            )
+            .navigationTitle("Disney Characters")
+            .searchable(
+                text: $viewModel.searchText,
+                isPresented: $isSearching,
+                prompt: "Search characters..."
+            )
+            .onChange(of: viewModel.searchText) {
+                viewModel.onSearchTextChanged()
             }
-        }
-        .searchable(
-            text: $viewModel.searchText,
-            isPresented: $isSearching,
-            prompt: "Search characters..."
-        )
-        .onChange(of: viewModel.searchText) {
-            viewModel.onSearchTextChanged()
         }
     }
     
-    private var characterList: some View {
-        List(viewModel.characters, id: \.self) { character in
+    private var loadingView: some View {
+        characterList(MockData.characters.data)
+            .redacted(reason: .placeholder)
+    }
+    
+    private var emptyView: some View {
+        EmptyPlaceholder(type: .empty)
+    }
+    
+    private var errorView: some View {
+        EmptyPlaceholder(type: .error)
+    }
+    
+    private var content: some View {
+        Group {
+            if isSearching, viewModel.searchText.isEmpty {
+                suggestionsSection
+            } else {
+                characterList(viewModel.characters)
+            }
+        }
+    }
+    
+    private func characterList(_ characters: [Character]) -> some View {
+        List(characters, id: \.self) { character in
             NavigationLink(value: character) {
                 row(character)
                     .onAppear {
@@ -35,26 +61,11 @@ struct CharacterListView: View {
                     }
             }
         }
-        .navigationTitle("Disney Characters")
         .navigationDestination(for: Character.self) { character in
             CharacterDetailView(character: character)
         }
         .refreshable {
             await viewModel.refresh()
-        }
-        .overlay {
-            if viewModel.isLoading {
-                ProgressView()
-            }
-        }
-        .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
-            Button("OK") {
-                viewModel.errorMessage = nil
-            }
-        } message: {
-            if let error = viewModel.errorMessage {
-                Text(error)
-            }
         }
     }
     
