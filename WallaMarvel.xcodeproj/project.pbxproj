@@ -33,6 +33,7 @@
 		ADD0BAC52F2E9971000653ED /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC42F2E9971000653ED /* ImageView.swift */; };
 		ADD0BAC82F2E9999000653ED /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = ADD0BAC72F2E9999000653ED /* SDWebImageSwiftUI */; };
 		ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */; };
+		ADD0BACC2F2F8C95000653ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +83,7 @@
 		ADD0BAC02F2E23F4000653ED /* WallaMarvelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallaMarvelApp.swift; sourceTree = "<group>"; };
 		ADD0BAC42F2E9971000653ED /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
+		ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -239,6 +241,7 @@
 		AD7FA5F82F2AC1E100F22B24 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				ADD0BACD2F2F8C9A000653ED /* Splash */,
 				AD4940962F2D1C680024249A /* Characters */,
 			);
 			path = Features;
@@ -295,6 +298,14 @@
 				ADD0BAC42F2E9971000653ED /* ImageView.swift */,
 			);
 			path = ViewComponents;
+			sourceTree = "<group>";
+		};
+		ADD0BACD2F2F8C9A000653ED /* Splash */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */,
+			);
+			path = Splash;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -405,6 +416,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1A0E3AA22862F7E300132FCB /* Assets.xcassets in Resources */,
+				ADD0BACC2F2F8C95000653ED /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
