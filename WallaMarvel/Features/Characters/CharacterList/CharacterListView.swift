@@ -46,6 +46,8 @@ struct CharacterListView: View {
         Group {
             if isSearching, viewModel.searchText.isEmpty {
                 suggestionsSection
+            } else if isSearching, viewModel.state == .loading {
+                loadingView
             } else {
                 characterList(viewModel.characters)
             }
@@ -86,7 +88,12 @@ struct CharacterListView: View {
     
     private func row(_ character: Character) -> some View {
         HStack(spacing: Spacing.medium) {
-            ImageView(imageUrl: character.imageUrl, size: 80)
+            ImageView(
+                imageUrl: character.imageUrl,
+                width: 80,
+                height: 80,
+                cornerRadius: 8
+            )
             
             Text(character.name)
                 .font(.headline)

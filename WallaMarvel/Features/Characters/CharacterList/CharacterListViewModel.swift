@@ -13,6 +13,7 @@ final class CharacterListViewModel: BaseViewModel {
     private let debouncer = Debouncer(delay: 0.3)
     private var currentPage = 1
     private var canLoadMore = false
+    private var cachedCharacters: [Character] = []
     let suggestionsList: [String]
     
     // MARK: - Initializer
@@ -45,11 +46,17 @@ final class CharacterListViewModel: BaseViewModel {
     func onSearchTextChanged() {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
+            characters = cachedCharacters
             state = .success
             return
         }
         
+        if state == .none || state == .success {
+            state = .loading
+        }
+        
         debouncer.debounce { [weak self] in
+            self?.cachedCharacters = self?.characters ?? []
             self?.currentPage = 1
             self?.characters = []
             self?.canLoadMore = false
@@ -63,7 +70,7 @@ final class CharacterListViewModel: BaseViewModel {
     // MARK: - Load data
     
     func loadCharacters() async {
-        guard state != .loading else { return }
+        guard state != .loading || !searchText.isEmpty else { return }
         
         await MainActor.run {
             if state == .none || state == .success {

@@ -1,10 +1,3 @@
-//
-//  CharacterDetailView.swift
-//  WallaMarvel
-//
-//  Created by Fatima Syed on 1/2/26.
-//
-
 import SwiftUI
 
 struct CharacterDetailView: View {
@@ -13,14 +6,16 @@ struct CharacterDetailView: View {
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.large) {
-                ImageView(imageUrl: character.imageUrl, size: 300)
-                    .frame(maxWidth: .infinity)
-                
+                ImageView(
+                    imageUrl: character.imageUrl,
+                    height: 350,
+                    maxWidth: UIScreen.main.bounds.width,
+                    cornerRadius: 0)
                 if !character.films.isEmpty {
                     informationSection
+                        .offset(y: -30)
                 }
             }
-            .padding(.horizontal, Spacing.medium)
         }
         .scrollIndicators(.hidden)
         .navigationTitle(character.name)
@@ -38,7 +33,10 @@ struct CharacterDetailView: View {
                     .font(.headline)
             }
         }
-
+        .padding(Spacing.medium)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background(.white)
+        .clipShape(RoundedCorner(radius: 16, corners: [.topLeft, .topRight]))
     }
 }
 

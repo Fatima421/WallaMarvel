@@ -42,6 +42,7 @@
 		ADD0BAE32F2FD808000653ED /* EmptyPlaceholder.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAE22F2FD808000653ED /* EmptyPlaceholder.swift */; };
 		ADD0BAE92F2FD84F000653ED /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAE52F2FD84F000653ED /* Spacing.swift */; };
 		ADD0BAED2F2FDA98000653ED /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAEC2F2FDA98000653ED /* Image+.swift */; };
+		ADD0BAEF2F3002B4000653ED /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAEE2F3002B4000653ED /* RoundedCorner.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +101,7 @@
 		ADD0BAE22F2FD808000653ED /* EmptyPlaceholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPlaceholder.swift; sourceTree = "<group>"; };
 		ADD0BAE52F2FD84F000653ED /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		ADD0BAEC2F2FDA98000653ED /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
+		ADD0BAEE2F3002B4000653ED /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +321,7 @@
 			children = (
 				ADD0BAE22F2FD808000653ED /* EmptyPlaceholder.swift */,
 				ADD0BAC42F2E9971000653ED /* ImageView.swift */,
+				ADD0BAEE2F3002B4000653ED /* RoundedCorner.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				1A821ED4286302EC0024D397 /* CharactersDataModel.swift in Sources */,
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,
 				ADD0BAE32F2FD808000653ED /* EmptyPlaceholder.swift in Sources */,
+				ADD0BAEF2F3002B4000653ED /* RoundedCorner.swift in Sources */,
 				ADD0BADD2F2FD23B000653ED /* BaseViewModel.swift in Sources */,
 				AD0979172F2D666800D5501A /* CharacterListViewModel.swift in Sources */,
 				ADD0BAED2F2FDA98000653ED /* Image+.swift in Sources */,

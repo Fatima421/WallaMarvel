@@ -3,7 +3,10 @@ import SDWebImageSwiftUI
 
 struct ImageView: View {
     let imageUrl: String?
-    let size: CGFloat
+    var width: CGFloat?
+    var height: CGFloat?
+    var maxWidth: CGFloat?
+    var cornerRadius: CGFloat
     
     var body: some View {
         if let imageUrl, let url = URL(string: imageUrl) {
@@ -11,8 +14,9 @@ struct ImageView: View {
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(width: size, height: size)
-                    .clipShape(RoundedRectangle(cornerRadius: 8))
+                    .frame(width: width, height: height)
+                    .frame(maxWidth: maxWidth)
+                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             } placeholder: {
                 placeholder
             }
@@ -31,5 +35,5 @@ struct ImageView: View {
 }
 
 #Preview {
-    ImageView(imageUrl: "https://picsum.photos/200/300", size: 80)
+    ImageView(imageUrl: "https://picsum.photos/200/300", cornerRadius: 8)
 }
