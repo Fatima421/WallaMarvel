@@ -12,7 +12,7 @@ final class CharacterListViewModel: BaseViewModel {
     private let searchCharactersUseCase: SearchCharactersUseCaseProtocol
     private let debouncer = Debouncer(delay: 0.3)
     private var currentPage = 1
-    private var canLoadMore = true
+    private var canLoadMore = false
     let suggestionsList: [String]
     
     // MARK: - Initializer
@@ -77,7 +77,6 @@ final class CharacterListViewModel: BaseViewModel {
         guard !isLoadingMore, state != .loading, canLoadMore else { return }
         
         await MainActor.run { isLoadingMore = true }
-        currentPage += 1
         
         await fetchCharacters()
         
@@ -86,24 +85,22 @@ final class CharacterListViewModel: BaseViewModel {
     
     private func fetchCharacters() async {
         do {
+            let nextPage = canLoadMore ? currentPage + 1 : currentPage
             let result: Characters
             
             if !searchText.isEmpty {
-                result = try await searchCharactersUseCase.execute(name: searchText, page: currentPage)
+                result = try await searchCharactersUseCase.execute(name: searchText, page: nextPage)
             } else {
-                result = try await getCharactersUseCase.execute(page: currentPage)
+                result = try await getCharactersUseCase.execute(page: nextPage)
             }
             
-            
             await MainActor.run {
+                currentPage = nextPage
                 state = result.data.isEmpty ? .empty : .success
                 characters.append(contentsOf: result.data)
                 canLoadMore = result.hasNextPage
             }
         } catch {
-            if !characters.isEmpty {
-                currentPage -= 1
-            }
             await MainActor.run {
                 errorMessage = error.localizedDescription
                 state = .failure
@@ -112,6 +109,12 @@ final class CharacterListViewModel: BaseViewModel {
     }
     
     func refresh() async {
+        await MainActor.run {
+            currentPage = 1
+            characters = []
+            canLoadMore = false
+            state = .none
+        }
         await loadCharacters()
     }
 }

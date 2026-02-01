@@ -9,7 +9,7 @@ import SwiftUI
 
 enum EmptyPlaceholderType {
     case empty
-    case error
+    case error(retryAction: () -> Void)
 
     var image: Image {
         switch self {
@@ -49,10 +49,18 @@ struct EmptyPlaceholder: View {
             
             Text(type.description)
                 .font(.headline)
+                .multilineTextAlignment(.center)
             
             type.image
                 .style(size: 150)
                 .padding(.bottom, Spacing.verySmall)
+            
+            if case .error(let retry) = type {
+                Button("Try again") {
+                    retry()
+                }
+                .buttonStyle(.bordered)
+            }
         }
         .frame(maxHeight: .infinity, alignment: .top)
         .padding(Spacing.medium)

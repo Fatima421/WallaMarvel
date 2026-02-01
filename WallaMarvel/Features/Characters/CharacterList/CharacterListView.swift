@@ -35,7 +35,11 @@ struct CharacterListView: View {
     }
     
     private var errorView: some View {
-        EmptyPlaceholder(type: .error)
+        EmptyPlaceholder(type: .error {
+            Task {
+                await viewModel.refresh()
+            }
+        })
     }
     
     private var content: some View {
@@ -65,7 +69,11 @@ struct CharacterListView: View {
             CharacterDetailView(character: character)
         }
         .refreshable {
-            await viewModel.refresh()
+            if !isSearching {
+                await Task {
+                    await viewModel.refresh()
+                }.value
+            }
         }
     }
     
