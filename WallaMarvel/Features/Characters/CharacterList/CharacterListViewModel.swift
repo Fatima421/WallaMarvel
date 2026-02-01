@@ -12,6 +12,7 @@ final class CharacterListViewModel: ObservableObject {
 
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
     private let searchCharactersUseCase: SearchCharactersUseCaseProtocol
+    private let debouncer = Debouncer(delay: 0.3)
     private var currentPage = 1
     private var canLoadMore = true
     let suggestionsList: [String]
@@ -42,10 +43,16 @@ final class CharacterListViewModel: ObservableObject {
     // MARK: - User actions
     
     func onSearchTextChanged() {
-        currentPage = 1
-        characters = []
-        Task {
-            await loadCharacters()
+        let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !trimmed.isEmpty else { return }
+        
+        debouncer.debounce { [weak self] in
+            self?.currentPage = 1
+            self?.characters = []
+            
+            Task {
+                await self?.loadCharacters()
+            }
         }
     }
     
@@ -90,7 +97,9 @@ final class CharacterListViewModel: ObservableObject {
             if !characters.isEmpty {
                 currentPage -= 1
             }
-            errorMessage = error.localizedDescription
+            await MainActor.run {
+                errorMessage = error.localizedDescription
+            }
         }
     }
     

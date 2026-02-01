@@ -3,6 +3,22 @@ import Foundation
 struct CharactersDataModel: Decodable {
     let info: PaginationInfo
     let data: [CharacterDataModel]
+    
+    enum CodingKeys: String, CodingKey {
+        case info, data
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.info = try container.decode(PaginationInfo.self, forKey: .info)
+        
+        do {
+            self.data = try container.decode([CharacterDataModel].self, forKey: .data)
+        } catch {
+            let single = try container.decode(CharacterDataModel.self, forKey: .data)
+            self.data = [single]
+        }
+    }
 }
 
 struct PaginationInfo: Decodable {

@@ -35,8 +35,7 @@
 		ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */; };
 		ADD0BACC2F2F8C95000653ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */; };
 		ADD0BACF2F2F8F05000653ED /* SearchCharactersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BACE2F2F8F05000653ED /* SearchCharactersUseCase.swift */; };
-		ADD0BAD22F2F910D000653ED /* SearchCharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAD12F2F910D000653ED /* SearchCharacterView.swift */; };
-		ADD0BAD42F2F9181000653ED /* SearchCharacterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAD32F2F9181000653ED /* SearchCharacterViewModel.swift */; };
+		ADD0BADA2F2FCED8000653ED /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAD92F2FCED8000653ED /* Debouncer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,8 +87,7 @@
 		ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDetailView.swift; sourceTree = "<group>"; };
 		ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ADD0BACE2F2F8F05000653ED /* SearchCharactersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharactersUseCase.swift; sourceTree = "<group>"; };
-		ADD0BAD12F2F910D000653ED /* SearchCharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharacterView.swift; sourceTree = "<group>"; };
-		ADD0BAD32F2F9181000653ED /* SearchCharacterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCharacterViewModel.swift; sourceTree = "<group>"; };
+		ADD0BAD92F2FCED8000653ED /* Debouncer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Debouncer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -223,7 +221,6 @@
 				1A821EC62862FD650024D397 /* Domain */,
 				1A821EC42862FD470024D397 /* CharacterList */,
 				1A821EC52862FD500024D397 /* CharacterDetail */,
-				ADD0BAD02F2F90ED000653ED /* SearchCharacter */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -295,6 +292,7 @@
 		ADD0BAC22F2E9942000653ED /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				ADD0BAD82F2FCEBD000653ED /* Utils */,
 				ADD0BAC32F2E995D000653ED /* ViewComponents */,
 			);
 			path = Common;
@@ -316,13 +314,12 @@
 			path = Splash;
 			sourceTree = "<group>";
 		};
-		ADD0BAD02F2F90ED000653ED /* SearchCharacter */ = {
+		ADD0BAD82F2FCEBD000653ED /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				ADD0BAD12F2F910D000653ED /* SearchCharacterView.swift */,
-				ADD0BAD32F2F9181000653ED /* SearchCharacterViewModel.swift */,
+				ADD0BAD92F2FCED8000653ED /* Debouncer.swift */,
 			);
-			path = SearchCharacter;
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -464,9 +461,9 @@
 				ADD0BAC52F2E9971000653ED /* ImageView.swift in Sources */,
 				AD49409C2F2D1DA50024249A /* Characters.swift in Sources */,
 				AD49409D2F2D1DA50024249A /* Character.swift in Sources */,
-				ADD0BAD22F2F910D000653ED /* SearchCharacterView.swift in Sources */,
 				1A821ED82863081A0024D397 /* CharacterRepository.swift in Sources */,
 				1AC0347F2863214900E93178 /* GetCharactersUseCase.swift in Sources */,
+				ADD0BADA2F2FCED8000653ED /* Debouncer.swift in Sources */,
 				AD0979192F2D676100D5501A /* CharacterListView.swift in Sources */,
 				ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
@@ -477,7 +474,6 @@
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,
 				AD0979172F2D666800D5501A /* CharacterListViewModel.swift in Sources */,
 				AD49409F2F2D60EF0024249A /* GetCharacterUseCase.swift in Sources */,
-				ADD0BAD42F2F9181000653ED /* SearchCharacterViewModel.swift in Sources */,
 				ADD0BAC12F2E23F4000653ED /* WallaMarvelApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
