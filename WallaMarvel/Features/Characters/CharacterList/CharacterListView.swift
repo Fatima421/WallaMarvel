@@ -85,7 +85,7 @@ struct CharacterListView: View {
     }
     
     private func row(_ character: Character) -> some View {
-        HStack(spacing: 12) {
+        HStack(spacing: Spacing.medium) {
             ImageView(imageUrl: character.imageUrl, size: 80)
             
             Text(character.name)

@@ -12,17 +12,33 @@ struct CharacterDetailView: View {
     
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                ImageView(imageUrl: character.imageUrl, size: 250)
+            VStack(alignment: .leading, spacing: Spacing.large) {
+                ImageView(imageUrl: character.imageUrl, size: 300)
                     .frame(maxWidth: .infinity)
-                    //.ignoresSafeArea()
                 
-                Text(character.films.joined(separator: ", "))
+                if !character.films.isEmpty {
+                    informationSection
+                }
             }
+            .padding(.horizontal, Spacing.medium)
         }
         .scrollIndicators(.hidden)
         .navigationTitle(character.name)
         .navigationBarTitleDisplayMode(.inline)
+    }
+    
+    private var informationSection: some View {
+        VStack(alignment: .leading, spacing: Spacing.medium) {
+            Text("Films")
+                .font(.title2)
+                .fontWeight(.bold)
+            
+            ForEach(character.films, id: \.self) { film in
+                Text(film)
+                    .font(.headline)
+            }
+        }
+
     }
 }
 

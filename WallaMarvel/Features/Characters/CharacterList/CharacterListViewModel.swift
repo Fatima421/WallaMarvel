@@ -52,6 +52,7 @@ final class CharacterListViewModel: BaseViewModel {
         debouncer.debounce { [weak self] in
             self?.currentPage = 1
             self?.characters = []
+            self?.canLoadMore = false
             
             Task {
                 await self?.loadCharacters()

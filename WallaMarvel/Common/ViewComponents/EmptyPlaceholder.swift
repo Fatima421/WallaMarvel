@@ -46,6 +46,7 @@ struct EmptyPlaceholder: View {
         VStack(spacing: Spacing.small) {
             Text(type.title)
                 .font(.title)
+                .fontWeight(.bold)
             
             Text(type.description)
                 .font(.headline)
@@ -53,7 +54,7 @@ struct EmptyPlaceholder: View {
             
             type.image
                 .style(size: 150)
-                .padding(.bottom, Spacing.verySmall)
+                .padding(.bottom, Spacing.small)
             
             if case .error(let retry) = type {
                 Button("Try again") {
