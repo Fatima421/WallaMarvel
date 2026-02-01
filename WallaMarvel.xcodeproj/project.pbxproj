@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1A0E3A992862F7E200132FCB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E3A982862F7E200132FCB /* AppDelegate.swift */; };
-		1A0E3A9B2862F7E200132FCB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E3A9A2862F7E200132FCB /* SceneDelegate.swift */; };
 		1A0E3AA22862F7E300132FCB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1A0E3AA12862F7E300132FCB /* Assets.xcassets */; };
-		1A0E3AB02862F7E300132FCB /* WallaMarvelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E3AAF2862F7E300132FCB /* WallaMarvelTests.swift */; };
 		1A0E3ABA2862F7E300132FCB /* WallaMarvelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E3AB92862F7E300132FCB /* WallaMarvelUITests.swift */; };
 		1A0E3ABC2862F7E300132FCB /* WallaMarvelUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A0E3ABB2862F7E300132FCB /* WallaMarvelUITestsLaunchTests.swift */; };
 		1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1A7B9BBC286D81AA00EBC1A6 /* CharacterDataModel.swift */; };
@@ -28,6 +25,13 @@
 		ADB9BCFB2F2D0C7800E067CA /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB9BCFA2F2D0C7800E067CA /* Endpoint.swift */; };
 		ADB9BCFD2F2D0FC100E067CA /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB9BCFC2F2D0FC100E067CA /* RestManager.swift */; };
 		ADB9BCFF2F2D115200E067CA /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB9BCFE2F2D115100E067CA /* NetworkError.swift */; };
+		ADD0BAAF2F2D774F000653ED /* CharacterDataSourceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAAE2F2D774F000653ED /* CharacterDataSourceTests.swift */; };
+		ADD0BAB12F2D7752000653ED /* CharacterRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAB02F2D7752000653ED /* CharacterRepositoryTests.swift */; };
+		ADD0BAB72F2D7841000653ED /* MockAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAB62F2D7841000653ED /* MockAPIClient.swift */; };
+		ADD0BAB92F2D791E000653ED /* MockCharacterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAB82F2D791E000653ED /* MockCharacterDataSource.swift */; };
+		ADD0BAC12F2E23F4000653ED /* WallaMarvelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC02F2E23F4000653ED /* WallaMarvelApp.swift */; };
+		ADD0BAC52F2E9971000653ED /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC42F2E9971000653ED /* ImageView.swift */; };
+		ADD0BAC82F2E9999000653ED /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = ADD0BAC72F2E9999000653ED /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,12 +53,9 @@
 
 /* Begin PBXFileReference section */
 		1A0E3A952862F7E200132FCB /* WallaMarvel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WallaMarvel.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A0E3A982862F7E200132FCB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		1A0E3A9A2862F7E200132FCB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		1A0E3AA12862F7E300132FCB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1A0E3AA62862F7E300132FCB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1A0E3AAB2862F7E300132FCB /* WallaMarvelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallaMarvelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1A0E3AAF2862F7E300132FCB /* WallaMarvelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallaMarvelTests.swift; sourceTree = "<group>"; };
 		1A0E3AB52862F7E300132FCB /* WallaMarvelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WallaMarvelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		1A0E3AB92862F7E300132FCB /* WallaMarvelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallaMarvelUITests.swift; sourceTree = "<group>"; };
 		1A0E3ABB2862F7E300132FCB /* WallaMarvelUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallaMarvelUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -73,6 +74,12 @@
 		ADB9BCFA2F2D0C7800E067CA /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		ADB9BCFC2F2D0FC100E067CA /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		ADB9BCFE2F2D115100E067CA /* NetworkError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		ADD0BAAE2F2D774F000653ED /* CharacterDataSourceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterDataSourceTests.swift; sourceTree = "<group>"; };
+		ADD0BAB02F2D7752000653ED /* CharacterRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterRepositoryTests.swift; sourceTree = "<group>"; };
+		ADD0BAB62F2D7841000653ED /* MockAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPIClient.swift; sourceTree = "<group>"; };
+		ADD0BAB82F2D791E000653ED /* MockCharacterDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockCharacterDataSource.swift; sourceTree = "<group>"; };
+		ADD0BAC02F2E23F4000653ED /* WallaMarvelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WallaMarvelApp.swift; sourceTree = "<group>"; };
+		ADD0BAC42F2E9971000653ED /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +87,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADD0BAC82F2E9999000653ED /* SDWebImageSwiftUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -123,9 +131,9 @@
 		1A0E3A972862F7E200132FCB /* WallaMarvel */ = {
 			isa = PBXGroup;
 			children = (
-				1A0E3A982862F7E200132FCB /* AppDelegate.swift */,
-				1A0E3A9A2862F7E200132FCB /* SceneDelegate.swift */,
+				ADD0BAC02F2E23F4000653ED /* WallaMarvelApp.swift */,
 				AD7FA5F92F2AC20300F22B24 /* Core */,
+				ADD0BAC22F2E9942000653ED /* Common */,
 				AD7FA5F82F2AC1E100F22B24 /* Features */,
 				1A0E3AA12862F7E300132FCB /* Assets.xcassets */,
 				1A0E3AA62862F7E300132FCB /* Info.plist */,
@@ -136,7 +144,9 @@
 		1A0E3AAE2862F7E300132FCB /* WallaMarvelTests */ = {
 			isa = PBXGroup;
 			children = (
-				1A0E3AAF2862F7E300132FCB /* WallaMarvelTests.swift */,
+				ADD0BAB52F2D7831000653ED /* Mocks */,
+				ADD0BAAC2F2D773C000653ED /* Data */,
+				ADD0BAAD2F2D7740000653ED /* Domain */,
 			);
 			path = WallaMarvelTests;
 			sourceTree = "<group>";
@@ -159,11 +169,11 @@
 			path = CharacterList;
 			sourceTree = "<group>";
 		};
-		1A821EC52862FD500024D397 /* Detail Character */ = {
+		1A821EC52862FD500024D397 /* CharacterDetail */ = {
 			isa = PBXGroup;
 			children = (
 			);
-			path = "Detail Character";
+			path = CharacterDetail;
 			sourceTree = "<group>";
 		};
 		1A821EC62862FD650024D397 /* Domain */ = {
@@ -200,7 +210,7 @@
 				1A821EC72862FD6E0024D397 /* Data */,
 				1A821EC62862FD650024D397 /* Domain */,
 				1A821EC42862FD470024D397 /* CharacterList */,
-				1A821EC52862FD500024D397 /* Detail Character */,
+				1A821EC52862FD500024D397 /* CharacterDetail */,
 			);
 			path = Characters;
 			sourceTree = "<group>";
@@ -241,6 +251,47 @@
 				AD09791A2F2D6C5300D5501A /* AppContainer.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		ADD0BAAC2F2D773C000653ED /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAAE2F2D774F000653ED /* CharacterDataSourceTests.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		ADD0BAAD2F2D7740000653ED /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAB02F2D7752000653ED /* CharacterRepositoryTests.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		ADD0BAB52F2D7831000653ED /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAB62F2D7841000653ED /* MockAPIClient.swift */,
+				ADD0BAB82F2D791E000653ED /* MockCharacterDataSource.swift */,
+			);
+			path = Mocks;
+			sourceTree = "<group>";
+		};
+		ADD0BAC22F2E9942000653ED /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAC32F2E995D000653ED /* ViewComponents */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		ADD0BAC32F2E995D000653ED /* ViewComponents */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAC42F2E9971000653ED /* ImageView.swift */,
+			);
+			path = ViewComponents;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -332,6 +383,7 @@
 			);
 			mainGroup = 1A0E3A8C2862F7E200132FCB;
 			packageReferences = (
+				ADD0BAC62F2E9999000653ED /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
 			);
 			productRefGroup = 1A0E3A962862F7E200132FCB /* Products */;
 			projectDirPath = "";
@@ -377,20 +429,20 @@
 				ADB9BCFB2F2D0C7800E067CA /* Endpoint.swift in Sources */,
 				ADB9BCFF2F2D115200E067CA /* NetworkError.swift in Sources */,
 				AD09791B2F2D6C5300D5501A /* AppContainer.swift in Sources */,
+				ADD0BAC52F2E9971000653ED /* ImageView.swift in Sources */,
 				AD49409C2F2D1DA50024249A /* Characters.swift in Sources */,
 				AD49409D2F2D1DA50024249A /* Character.swift in Sources */,
 				1A821ED82863081A0024D397 /* CharacterRepository.swift in Sources */,
 				1AC0347F2863214900E93178 /* GetCharactersUseCase.swift in Sources */,
 				AD0979192F2D676100D5501A /* CharacterListView.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
-				1A0E3A992862F7E200132FCB /* AppDelegate.swift in Sources */,
 				ADB9BCFD2F2D0FC100E067CA /* RestManager.swift in Sources */,
 				1A821ED6286305590024D397 /* CharacterDataSource.swift in Sources */,
-				1A0E3A9B2862F7E200132FCB /* SceneDelegate.swift in Sources */,
 				1A821ED4286302EC0024D397 /* CharactersDataModel.swift in Sources */,
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,
 				AD0979172F2D666800D5501A /* CharacterListViewModel.swift in Sources */,
 				AD49409F2F2D60EF0024249A /* GetCharacterUseCase.swift in Sources */,
+				ADD0BAC12F2E23F4000653ED /* WallaMarvelApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -398,7 +450,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1A0E3AB02862F7E300132FCB /* WallaMarvelTests.swift in Sources */,
+				ADD0BAAF2F2D774F000653ED /* CharacterDataSourceTests.swift in Sources */,
+				ADD0BAB72F2D7841000653ED /* MockAPIClient.swift in Sources */,
+				ADD0BAB92F2D791E000653ED /* MockCharacterDataSource.swift in Sources */,
+				ADD0BAB12F2D7752000653ED /* CharacterRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -554,7 +609,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -581,7 +636,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -603,7 +658,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallapop.WallaMarvelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -622,7 +677,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.wallapop.WallaMarvelTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -707,6 +762,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		ADD0BAC62F2E9999000653ED /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.1.4;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		ADD0BAC72F2E9999000653ED /* SDWebImageSwiftUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = ADD0BAC62F2E9999000653ED /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
+			productName = SDWebImageSwiftUI;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1A0E3A8D2862F7E200132FCB /* Project object */;
 }

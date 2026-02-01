@@ -1,10 +1,3 @@
-//
-//  RestManager.swift
-//  WallaMarvel
-//
-//  Created by Fatima Syed on 30/1/26.
-//
-
 import Foundation
 
 protocol RestManagerProtocol {
@@ -62,7 +55,7 @@ final class RestManager: RestManagerProtocol {
         }
         
         guard (200...299).contains(httpResponse.statusCode) else {
-            throw NetworkError.serverError(statusCode: httpResponse.statusCode)
+            throw NetworkError.serverError
         }
     }
     
@@ -72,7 +65,7 @@ final class RestManager: RestManagerProtocol {
         do {
             return try decoder.decode(T.self, from: data)
         } catch {
-            throw NetworkError.decodingError(error)
+            throw NetworkError.decodingError
         }
     }
 }

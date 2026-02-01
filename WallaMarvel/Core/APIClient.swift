@@ -1,20 +1,25 @@
 import Foundation
 
 protocol APIClientProtocol {
-    func getCharacters(page: Int) async throws -> CharacterDataContainer
+    func getCharacters(page: Int) async throws -> CharactersDataModel
     func getCharacterBy(id: Int) async throws -> CharacterDataModel
 }
 
 final class APIClient: APIClientProtocol {
+    
     // MARK: - Properties
+    
     private let restManager: RestManagerProtocol
 
     // MARK: - Initializer
+    
     init(restManager: RestManagerProtocol) {
         self.restManager = restManager
     }
     
-    func getCharacters(page: Int) async throws -> CharacterDataContainer {
+    // MARK: - Methods
+    
+    func getCharacters(page: Int) async throws -> CharactersDataModel {
         let endpoint: Endpoint = .getCharacters(page: page)
         return try await restManager.request(endpoint: endpoint)
     }

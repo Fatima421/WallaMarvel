@@ -1,10 +1,3 @@
-//
-//  AppContainer.swift
-//  WallaMarvel
-//
-//  Created by Fatima Syed on 30/1/26.
-//
-
 import Foundation
 
 final class AppContainer {
@@ -12,7 +5,7 @@ final class AppContainer {
     
     private init() {}
     
-    // MARK: - Network
+    // MARK: - Network Layer
     
     private lazy var restManager: RestManagerProtocol = {
         RestManager()
@@ -23,16 +16,19 @@ final class AppContainer {
     }()
     
     // MARK: - Data Sources
-    private lazy var characterDataSource: CharacterDataSource = {
+    
+    private lazy var characterDataSource: CharacterDataSourceProtocol = {
         CharacterDataSource(apiClient: apiClient)
     }()
     
     // MARK: - Repositories
+    
     private lazy var characterRepository: CharacterRepositoryProtocol = {
         CharacterRepository(dataSource: characterDataSource)
     }()
     
     // MARK: - Use Cases
+    
     func makeGetCharactersUseCase() -> GetCharactersUseCaseProtocol {
         GetCharactersUseCase(repository: characterRepository)
     }

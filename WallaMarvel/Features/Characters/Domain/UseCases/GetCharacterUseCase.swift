@@ -5,7 +5,12 @@ protocol GetCharacterUseCaseProtocol {
 }
 
 final class GetCharacterUseCase: GetCharacterUseCaseProtocol {
+    
+    // MARK: - Properties
+    
     private let repository: CharacterRepositoryProtocol
+    
+    // MARK: - Initializer
     
     init(repository: CharacterRepositoryProtocol) {
         self.repository = repository

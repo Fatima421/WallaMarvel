@@ -1,38 +1,69 @@
-//
-//  CharacterListViewModel.swift
-//  WallaMarvel
-//
-//  Created by Fatima Syed on 30/1/26.
-//
-
 import Foundation
 
 final class CharacterListViewModel: ObservableObject {
-    // MARK: - Properties
+    
+    // MARK: - Published Properties
+    
     @Published var characters: [Character] = []
     @Published var isLoading = false
+    @Published var isLoadingMore = false
     @Published var errorMessage: String?
+    
+    // MARK: - Private Properties
     
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
     private var currentPage = 1
+    private var canLoadMore = true
     
     // MARK: - Initializer
     
     init(getCharactersUseCase: GetCharactersUseCaseProtocol = AppContainer.shared.makeGetCharactersUseCase()) {
         self.getCharactersUseCase = getCharactersUseCase
+        
+        Task {
+            await loadCharacters()
+        }
     }
     
     // MARK: - Load data
-    func loadCharacters() async {
-        isLoading = true
-        errorMessage = nil
+    
+    private func loadCharacters() async {
+        guard !isLoading else { return }
         
+        await MainActor.run { isLoading = true }
+
+        await fetchCharacters()
+
+        await MainActor.run { isLoading = false }
+    }
+    
+    func loadMoreCharacters() async {
+        guard !isLoadingMore, !isLoading, canLoadMore else { return }
+        
+        await MainActor.run { isLoadingMore = true }
+        currentPage += 1
+        
+        await fetchCharacters()
+        
+        await MainActor.run { isLoadingMore = false }
+    }
+    
+    private func fetchCharacters() async {
         do {
-            characters = try await getCharactersUseCase.execute(page: currentPage)
+            let result = try await getCharactersUseCase.execute(page: currentPage)
+            await MainActor.run {
+                characters.append(contentsOf: result.data)
+                canLoadMore = result.hasNextPage
+            }
         } catch {
+            if !characters.isEmpty {
+                currentPage -= 1
+            }
             errorMessage = error.localizedDescription
         }
-        
-        isLoading = false
+    }
+    
+    func refresh() async {
+        await loadCharacters()
     }
 }

@@ -1,18 +1,55 @@
-//
-//  ListCharacterView.swift
-//  WallaMarvel
-//
-//  Created by Fatima Syed on 30/1/26.
-//
-
 import SwiftUI
 
-struct ListCharacterView: View {
+struct CharacterListView: View {
+    @StateObject var viewModel: CharacterListViewModel
+        
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            List(viewModel.characters, id: \.id) { character in
+                VStack(alignment: .leading) {
+                    row(character)
+                        .onAppear {
+                            if character.id == viewModel.characters.last?.id {
+                                Task {
+                                    await viewModel.loadMoreCharacters()
+                                }
+                            }
+                        }
+                }
+            }
+            .navigationTitle("Disney Characters")
+            .refreshable {
+                await viewModel.refresh()
+            }
+            .overlay {
+                if viewModel.isLoading {
+                    ProgressView()
+                }
+            }
+            .alert("Error", isPresented: .constant(viewModel.errorMessage != nil)) {
+                Button("OK") {
+                    viewModel.errorMessage = nil
+                }
+            } message: {
+                if let error = viewModel.errorMessage {
+                    Text(error)
+                }
+            }
+        }
+    }
+    
+    private func row(_ character: Character) -> some View {
+        HStack(spacing: 12) {
+            if let image = character.imageUrl, let url = URL(string: image) {
+                ImageView(imageUrl: url)
+            }
+            
+            Text(character.name)
+                .font(.headline)
+        }
     }
 }
 
 #Preview {
-    ListCharacterView()
+    CharacterListView(viewModel: CharacterListViewModel())
 }

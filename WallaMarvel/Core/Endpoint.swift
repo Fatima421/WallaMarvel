@@ -1,10 +1,3 @@
-//
-//  Endpoint.swift
-//  WallaMarvel
-//
-//  Created by Fatima Syed on 30/1/26.
-//
-
 import Foundation
 
 enum Endpoint {
@@ -30,8 +23,8 @@ enum Endpoint {
     var queryParams: [String: String]? {
         switch self {
         case let .getCharacters(page):
-            var dict: [String: String] = [
-                "pageNumber": "\(page)",
+            let dict: [String: String] = [
+                "page": "\(page)",
                 "pageSize": "25",
             ]
             return dict
