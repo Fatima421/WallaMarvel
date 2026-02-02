@@ -46,6 +46,7 @@
 		ADD0BAF22F3014D8000653ED /* CharacterListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAF02F3014D8000653ED /* CharacterListViewModelTests.swift */; };
 		ADD0BAF42F301517000653ED /* MockSearchCharactersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAF32F301517000653ED /* MockSearchCharactersUseCase.swift */; };
 		ADD0BAF62F301587000653ED /* MockGetCharactersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAF52F301587000653ED /* MockGetCharactersUseCase.swift */; };
+		ADD0BAF82F30ACDD000653ED /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAF72F30ACDD000653ED /* MockData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,6 +109,7 @@
 		ADD0BAF02F3014D8000653ED /* CharacterListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModelTests.swift; sourceTree = "<group>"; };
 		ADD0BAF32F301517000653ED /* MockSearchCharactersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchCharactersUseCase.swift; sourceTree = "<group>"; };
 		ADD0BAF52F301587000653ED /* MockGetCharactersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGetCharactersUseCase.swift; sourceTree = "<group>"; };
+		ADD0BAF72F30ACDD000653ED /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -304,6 +306,7 @@
 		ADD0BAB52F2D7831000653ED /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
+				ADD0BAF72F30ACDD000653ED /* MockData.swift */,
 				ADD0BAB62F2D7841000653ED /* MockAPIClient.swift */,
 				ADD0BAB82F2D791E000653ED /* MockCharacterDataSource.swift */,
 				ADD0BAF52F301587000653ED /* MockGetCharactersUseCase.swift */,
@@ -556,6 +559,7 @@
 				ADD0BAB72F2D7841000653ED /* MockAPIClient.swift in Sources */,
 				ADD0BAB92F2D791E000653ED /* MockCharacterDataSource.swift in Sources */,
 				ADD0BAB12F2D7752000653ED /* CharacterRepositoryTests.swift in Sources */,
+				ADD0BAF82F30ACDD000653ED /* MockData.swift in Sources */,
 				ADD0BAF22F3014D8000653ED /* CharacterListViewModelTests.swift in Sources */,
 				ADD0BAF62F301587000653ED /* MockGetCharactersUseCase.swift in Sources */,
 			);

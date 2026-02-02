@@ -20,9 +20,7 @@ class CharacterListViewModelTests: XCTestCase {
         mockSearchCharactersUseCase = nil
         super.tearDown()
     }
-    
-    // MARK: - Helper
-    
+        
     private func waitForState(_ expectedState: ViewState, timeout: TimeInterval = 1.0) async {
         let deadline = Date().addingTimeInterval(timeout)
         while sut.state != expectedState && Date() < deadline {
@@ -30,19 +28,11 @@ class CharacterListViewModelTests: XCTestCase {
         }
     }
     
-    private func makeMockCharacters(count: Int, hasNextPage: Bool = false) -> Characters {
-        let response = CharactersDataModel(
-            info: PaginationInfo(count: count, totalPages: 2, previousPage: nil, nextPage: hasNextPage ? "page=2" : nil),
-            data: (1...count).map { CharacterDataModel(id: $0, name: "Character \($0)", imageUrl: nil, films: []) }
-        )
-        return Characters(from: response, currentPage: 1)
-    }
-    
-    // MARK: - Tests
-    
-    func testInitLoadsCharacters() async {
+    // MARK: - Init Tests
+
+    func testInitLoadsCharactersSuccessfully() async {
         // Given
-        mockGetCharactersUseCase.mockResult = makeMockCharacters(count: 3)
+        mockGetCharactersUseCase.mockResult = MockData.characters
         
         // When
         sut = CharacterListViewModel(
@@ -52,13 +42,15 @@ class CharacterListViewModelTests: XCTestCase {
         await waitForState(.success)
         
         // Then
-        XCTAssertEqual(sut.characters.count, 3)
+        XCTAssertEqual(sut.characters.count, 2)
         XCTAssertEqual(sut.state, .success)
+        XCTAssertEqual(mockGetCharactersUseCase.executeCallCount, 1)
     }
     
-    func testInitWithErrorShowsFailure() async {
+    func testInitWithErrorShowsFailureState() async {
         // Given
         mockGetCharactersUseCase.shouldFail = true
+        mockGetCharactersUseCase.error = NetworkError.serverError
         
         // When
         sut = CharacterListViewModel(
@@ -70,11 +62,31 @@ class CharacterListViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(sut.characters.isEmpty)
         XCTAssertEqual(sut.state, .failure)
+        XCTAssertNotNil(sut.errorMessage)
     }
     
+    func testInitWithEmptyDataShowsEmptyState() async {
+        // Given
+        mockGetCharactersUseCase.mockResult = MockData.charactersEmpty
+        
+        // When
+        sut = CharacterListViewModel(
+            getCharactersUseCase: mockGetCharactersUseCase,
+            searchCharactersUseCase: mockSearchCharactersUseCase
+        )
+        await waitForState(.empty)
+        
+        // Then
+        XCTAssertTrue(sut.characters.isEmpty)
+        XCTAssertEqual(sut.state, .empty)
+    }
+        
+    // MARK: - Load data Tests
+
     func testLoadMoreAppendsCharacters() async {
         // Given
-        mockGetCharactersUseCase.mockResult = makeMockCharacters(count: 2, hasNextPage: true)
+        mockGetCharactersUseCase.mockResult = MockData.characters
+        
         sut = CharacterListViewModel(
             getCharactersUseCase: mockGetCharactersUseCase,
             searchCharactersUseCase: mockSearchCharactersUseCase
@@ -87,11 +99,53 @@ class CharacterListViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(sut.characters.count, 4)
         XCTAssertEqual(mockGetCharactersUseCase.executeCallCount, 2)
+        XCTAssertFalse(sut.isLoadingMore)
     }
     
-    func testRefreshReloadsData() async {
+    func testLoadMoreDoesNotLoadWhenCanLoadMoreIsFalse() async {
         // Given
-        mockGetCharactersUseCase.mockResult = makeMockCharacters(count: 2)
+        mockGetCharactersUseCase.mockResult = MockData.charactersWithNoNextPage
+        
+        sut = CharacterListViewModel(
+            getCharactersUseCase: mockGetCharactersUseCase,
+            searchCharactersUseCase: mockSearchCharactersUseCase
+        )
+        await waitForState(.success)
+        
+        // When
+        await sut.loadMoreCharacters()
+        
+        // Then
+        XCTAssertEqual(mockGetCharactersUseCase.executeCallCount, 1)
+        XCTAssertEqual(sut.characters.count, 2)
+    }
+    
+    func testLoadMoreWithErrorKeepsExistingCharacters() async {
+        // Given
+        mockGetCharactersUseCase.mockResult = MockData.characters
+        
+        sut = CharacterListViewModel(
+            getCharactersUseCase: mockGetCharactersUseCase,
+            searchCharactersUseCase: mockSearchCharactersUseCase
+        )
+        await waitForState(.success)
+        
+        mockGetCharactersUseCase.shouldFail = true
+        
+        // When
+        await sut.loadMoreCharacters()
+        
+        // Then
+        XCTAssertEqual(sut.characters.count, 2)
+        XCTAssertNotNil(sut.errorMessage)
+    }
+    
+    // MARK: - Refresh Tests
+
+    func testRefreshResetsAndReloadsData() async {
+        // Given
+        mockGetCharactersUseCase.mockResult = MockData.characters
+        
         sut = CharacterListViewModel(
             getCharactersUseCase: mockGetCharactersUseCase,
             searchCharactersUseCase: mockSearchCharactersUseCase
@@ -104,12 +158,37 @@ class CharacterListViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(sut.characters.count, 2)
         XCTAssertEqual(mockGetCharactersUseCase.executeCallCount, 2)
+        XCTAssertEqual(sut.state, .success)
     }
+    
+    func testRefreshClearsExistingCharacters() async {
+        // Given
+        mockGetCharactersUseCase.mockResult = MockData.characters
+        
+        sut = CharacterListViewModel(
+            getCharactersUseCase: mockGetCharactersUseCase,
+            searchCharactersUseCase: mockSearchCharactersUseCase
+        )
+        await waitForState(.success)
+        await sut.loadMoreCharacters()
+        
+        XCTAssertEqual(sut.characters.count, 4)
+        
+        mockGetCharactersUseCase.mockResult = MockData.singleCharacter
+        
+        // When
+        await sut.refresh()
+        
+        // Then
+        XCTAssertEqual(sut.characters.count, 1)
+    }
+    
+    // MARK: - Search Tests
     
     func testSearchTriggersSearchUseCase() async {
         // Given
-        mockGetCharactersUseCase.mockResult = makeMockCharacters(count: 1)
-        mockSearchCharactersUseCase.mockResult = makeMockCharacters(count: 1)
+        mockGetCharactersUseCase.mockResult = MockData.singleCharacter
+        mockSearchCharactersUseCase.mockResult = MockData.singleCharacter
         
         sut = CharacterListViewModel(
             getCharactersUseCase: mockGetCharactersUseCase,
@@ -126,5 +205,69 @@ class CharacterListViewModelTests: XCTestCase {
         // Then
         XCTAssertEqual(mockSearchCharactersUseCase.executeCallCount, 1)
         XCTAssertEqual(mockSearchCharactersUseCase.lastNameSearched, "Mickey")
+    }
+    
+    func testSearchWithEmptyTextDoesNotTriggerSearch() async {
+        // Given
+        mockGetCharactersUseCase.mockResult = MockData.characters
+        
+        sut = CharacterListViewModel(
+            getCharactersUseCase: mockGetCharactersUseCase,
+            searchCharactersUseCase: mockSearchCharactersUseCase
+        )
+        await waitForState(.success)
+        
+        // When
+        sut.searchText = ""
+        sut.onSearchTextChanged()
+        try? await Task.sleep(nanoseconds: 400_000_000)
+        
+        // Then
+        XCTAssertEqual(mockSearchCharactersUseCase.executeCallCount, 0)
+    }
+    
+    func testSearchWithWhitespaceOnlyDoesNotTriggerSearch() async {
+        // Given
+        mockGetCharactersUseCase.mockResult = MockData.characters
+        
+        sut = CharacterListViewModel(
+            getCharactersUseCase: mockGetCharactersUseCase,
+            searchCharactersUseCase: mockSearchCharactersUseCase
+        )
+        await waitForState(.success)
+        
+        // When
+        sut.searchText = "   "
+        sut.onSearchTextChanged()
+        try? await Task.sleep(nanoseconds: 400_000_000)
+        
+        // Then
+        XCTAssertEqual(mockSearchCharactersUseCase.executeCallCount, 0)
+    }
+    
+    func testClearingSearchRestoresCachedCharacters() async {
+        // Given
+        mockGetCharactersUseCase.mockResult = MockData.characters
+        mockSearchCharactersUseCase.mockResult = MockData.singleCharacter
+        
+        sut = CharacterListViewModel(
+            getCharactersUseCase: mockGetCharactersUseCase,
+            searchCharactersUseCase: mockSearchCharactersUseCase
+        )
+        await waitForState(.success)
+                
+        // Search
+        sut.searchText = "Mickey"
+        sut.onSearchTextChanged()
+        try? await Task.sleep(nanoseconds: 400_000_000)
+        await waitForState(.success)
+        
+        // When
+        sut.searchText = ""
+        sut.onSearchTextChanged()
+        
+        // Then
+        XCTAssertEqual(sut.characters.count, 2)
+        XCTAssertEqual(sut.state, .success)
     }
 }

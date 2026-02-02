@@ -26,14 +26,7 @@ class CharacterDataSourceTests: XCTestCase {
     
     func testGetCharactersSuccessReturnsCharacters() async throws {
         // Given
-        let mockResponse = CharactersDataModel(
-            info: PaginationInfo(count: 2, totalPages: 5, previousPage: nil, nextPage: "page=2"),
-            data: [
-                CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url1", films: []),
-                CharacterDataModel(id: 2, name: "Elsa", imageUrl: "url2", films: [])
-            ]
-        )
-        mockAPIClient.mockResponse = mockResponse
+        mockAPIClient.mockResponse = MockData.charactersDataModel
         
         // When
         let result = try await sut.getCharacters(page: 1)
@@ -62,8 +55,7 @@ class CharacterDataSourceTests: XCTestCase {
     
     func testGetCharacterByIdSuccessReturnsCharacter() async throws {
         // Given
-        let mockCharacter = CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url", films: [])
-        mockAPIClient.mockCharacterResponse = mockCharacter
+        mockAPIClient.mockCharacterResponse = MockData.characterDataModel
         
         // When
         let result = try await sut.getCharacterBy(id: 1)
