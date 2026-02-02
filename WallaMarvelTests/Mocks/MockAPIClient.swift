@@ -3,14 +3,14 @@ import Foundation
 
 final class MockAPIClient: APIClientProtocol {
     
-    // MARK: - Mock Properties
+    // MARK: - Properties
     
     var mockResponse: CharactersDataModel?
     var mockCharacterResponse: CharacterDataModel?
     var shouldFail = false
     var error: Error = NetworkError.unknown
     
-    // MARK: - Protocol Implementation
+    // MARK: - Methods
 
     func getCharacters(page: Int) async throws -> CharactersDataModel {
         if shouldFail {
@@ -30,6 +30,18 @@ final class MockAPIClient: APIClientProtocol {
         }
         
         guard let response = mockCharacterResponse else {
+            throw NetworkError.unknown
+        }
+        
+        return response
+    }
+    
+    func searchCharacters(name: String, page: Int) async throws -> CharactersDataModel {
+        if shouldFail {
+            throw error
+        }
+        
+        guard let response = mockResponse else {
             throw NetworkError.unknown
         }
         

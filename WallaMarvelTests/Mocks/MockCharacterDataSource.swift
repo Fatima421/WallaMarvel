@@ -3,14 +3,14 @@ import Foundation
 
 final class MockCharacterDataSource: CharacterDataSourceProtocol {
     
-    // MARK: - Mock Properties
+    // MARK: - Properties
     
     var mockCharactersResponse: CharactersDataModel?
     var mockCharacterResponse: CharacterDataModel?
     var shouldFail = false
     var error: Error = NetworkError.unknown
     
-    // MARK: - Protocol Implementation
+    // MARK: - Methods
 
     func getCharacters(page: Int) async throws -> CharactersDataModel {
         if shouldFail {
@@ -30,6 +30,18 @@ final class MockCharacterDataSource: CharacterDataSourceProtocol {
         }
         
         guard let response = mockCharacterResponse else {
+            throw NetworkError.unknown
+        }
+        
+        return response
+    }
+    
+    func searchCharacters(name: String, page: Int) async throws -> CharactersDataModel {
+        if shouldFail {
+            throw error
+        }
+        
+        guard let response = mockCharactersResponse else {
             throw NetworkError.unknown
         }
         

@@ -29,8 +29,8 @@ class CharacterRepositoryTests: XCTestCase {
         let mockResponse = CharactersDataModel(
             info: PaginationInfo(count: 2, totalPages: 5, previousPage: nil, nextPage: "page=2"),
             data: [
-                CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url1"),
-                CharacterDataModel(id: 2, name: "Elsa", imageUrl: "url2")
+                CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url1", films: []),
+                CharacterDataModel(id: 2, name: "Elsa", imageUrl: "url2", films: [])
             ]
         )
         mockDataSource.mockCharactersResponse = mockResponse
@@ -63,7 +63,7 @@ class CharacterRepositoryTests: XCTestCase {
     
     func testGetCharacterDetailSuccessMapsToCharacter() async throws {
         // Given
-        let mockCharacter = CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url")
+        let mockCharacter = CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url", films: [])
         mockDataSource.mockCharacterResponse = mockCharacter
         
         // When

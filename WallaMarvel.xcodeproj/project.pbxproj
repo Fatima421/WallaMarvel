@@ -43,6 +43,9 @@
 		ADD0BAE92F2FD84F000653ED /* Spacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAE52F2FD84F000653ED /* Spacing.swift */; };
 		ADD0BAED2F2FDA98000653ED /* Image+.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAEC2F2FDA98000653ED /* Image+.swift */; };
 		ADD0BAEF2F3002B4000653ED /* RoundedCorner.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAEE2F3002B4000653ED /* RoundedCorner.swift */; };
+		ADD0BAF22F3014D8000653ED /* CharacterListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAF02F3014D8000653ED /* CharacterListViewModelTests.swift */; };
+		ADD0BAF42F301517000653ED /* MockSearchCharactersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAF32F301517000653ED /* MockSearchCharactersUseCase.swift */; };
+		ADD0BAF62F301587000653ED /* MockGetCharactersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAF52F301587000653ED /* MockGetCharactersUseCase.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,6 +105,9 @@
 		ADD0BAE52F2FD84F000653ED /* Spacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spacing.swift; sourceTree = "<group>"; };
 		ADD0BAEC2F2FDA98000653ED /* Image+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+.swift"; sourceTree = "<group>"; };
 		ADD0BAEE2F3002B4000653ED /* RoundedCorner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCorner.swift; sourceTree = "<group>"; };
+		ADD0BAF02F3014D8000653ED /* CharacterListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModelTests.swift; sourceTree = "<group>"; };
+		ADD0BAF32F301517000653ED /* MockSearchCharactersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockSearchCharactersUseCase.swift; sourceTree = "<group>"; };
+		ADD0BAF52F301587000653ED /* MockGetCharactersUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockGetCharactersUseCase.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +175,7 @@
 				ADD0BAB52F2D7831000653ED /* Mocks */,
 				ADD0BAAC2F2D773C000653ED /* Data */,
 				ADD0BAAD2F2D7740000653ED /* Domain */,
+				ADD0BAF12F3014D8000653ED /* UI */,
 			);
 			path = WallaMarvelTests;
 			sourceTree = "<group>";
@@ -299,6 +306,8 @@
 			children = (
 				ADD0BAB62F2D7841000653ED /* MockAPIClient.swift */,
 				ADD0BAB82F2D791E000653ED /* MockCharacterDataSource.swift */,
+				ADD0BAF52F301587000653ED /* MockGetCharactersUseCase.swift */,
+				ADD0BAF32F301517000653ED /* MockSearchCharactersUseCase.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -365,6 +374,14 @@
 				ADD0BAEC2F2FDA98000653ED /* Image+.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		ADD0BAF12F3014D8000653ED /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAF02F3014D8000653ED /* CharacterListViewModelTests.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -535,9 +552,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADD0BAAF2F2D774F000653ED /* CharacterDataSourceTests.swift in Sources */,
+				ADD0BAF42F301517000653ED /* MockSearchCharactersUseCase.swift in Sources */,
 				ADD0BAB72F2D7841000653ED /* MockAPIClient.swift in Sources */,
 				ADD0BAB92F2D791E000653ED /* MockCharacterDataSource.swift in Sources */,
 				ADD0BAB12F2D7752000653ED /* CharacterRepositoryTests.swift in Sources */,
+				ADD0BAF22F3014D8000653ED /* CharacterListViewModelTests.swift in Sources */,
+				ADD0BAF62F301587000653ED /* MockGetCharactersUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

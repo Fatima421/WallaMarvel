@@ -29,8 +29,8 @@ class CharacterDataSourceTests: XCTestCase {
         let mockResponse = CharactersDataModel(
             info: PaginationInfo(count: 2, totalPages: 5, previousPage: nil, nextPage: "page=2"),
             data: [
-                CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url1"),
-                CharacterDataModel(id: 2, name: "Elsa", imageUrl: "url2")
+                CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url1", films: []),
+                CharacterDataModel(id: 2, name: "Elsa", imageUrl: "url2", films: [])
             ]
         )
         mockAPIClient.mockResponse = mockResponse
@@ -62,7 +62,7 @@ class CharacterDataSourceTests: XCTestCase {
     
     func testGetCharacterByIdSuccessReturnsCharacter() async throws {
         // Given
-        let mockCharacter = CharacterDataModel(id: 1, name: "Spider-Man", imageUrl: "url")
+        let mockCharacter = CharacterDataModel(id: 1, name: "Mickey Mouse", imageUrl: "url", films: [])
         mockAPIClient.mockCharacterResponse = mockCharacter
         
         // When
@@ -70,7 +70,7 @@ class CharacterDataSourceTests: XCTestCase {
         
         // Then
         XCTAssertEqual(result.id, 1)
-        XCTAssertEqual(result.name, "Spider-Man")
+        XCTAssertEqual(result.name, "Mickey Mouse")
     }
     
     func testGetCharacterByIdNetworkErrorThrowsError() async {

@@ -11,10 +11,8 @@ struct CharacterDetailView: View {
                     height: 350,
                     maxWidth: UIScreen.main.bounds.width,
                     cornerRadius: 0)
-                if !character.films.isEmpty {
-                    informationSection
-                        .offset(y: -30)
-                }
+                informationSection
+                    .offset(y: -30)
             }
         }
         .scrollIndicators(.hidden)
@@ -24,13 +22,15 @@ struct CharacterDetailView: View {
     
     private var informationSection: some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
-            Text("Films")
-                .font(.title2)
-                .fontWeight(.bold)
-            
-            ForEach(character.films, id: \.self) { film in
-                Text(film)
-                    .font(.headline)
+            if !character.films.isEmpty {
+                Text("Films")
+                    .font(.title2)
+                    .fontWeight(.bold)
+                
+                ForEach(character.films, id: \.self) { film in
+                    Text(film)
+                        .font(.headline)
+                }
             }
         }
         .padding(Spacing.medium)
