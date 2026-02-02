@@ -7,17 +7,24 @@ struct CharacterDataContainer: Decodable {
     let characters: [CharacterDataModel]
     
     enum CodingKeys: String, CodingKey {
-        case data
-        case count, limit, offset, characters = "results"
+        case info, data
     }
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        let data = try container.nestedContainer(keyedBy: CodingKeys.self, forKey: .data)
-        self.count = try data.decode(Int.self, forKey: .count)
-        self.limit = try data.decode(Int.self, forKey: .limit)
-        self.offset = try data.decode(Int.self, forKey: .offset)
+        let info = try container.decode(PaginationInfo.self, forKey: .info)
         
-        self.characters = try data.decode([CharacterDataModel].self, forKey: .characters)
+        self.count = info.count
+        self.limit = 0
+        self.offset = 0
+        
+        self.characters = try container.decode([CharacterDataModel].self, forKey: .data)
     }
+}
+
+struct PaginationInfo: Decodable {
+    let count: Int
+    let totalPages: Int
+    let previousPage: String?
+    let nextPage: String?
 }
