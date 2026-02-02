@@ -1,33 +1,110 @@
 import XCTest
 
-class WallaMarvelUITests: XCTestCase {
+final class WallaMarvelUITests: XCTestCase {
+    var app: XCUIApplication!
+
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
+        app = XCUIApplication()
+        app.launch()
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        app = nil
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    // MARK: - Launch
 
     func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
+        measure(metrics: [XCTApplicationLaunchMetric()]) {
+            XCUIApplication().launch()
         }
+    }
+
+    // MARK: - List Interaction Tests
+
+    func testCharacterListLoads() throws {
+        // Given
+        let characterList = app.collectionViews.firstMatch
+
+        // When
+        XCTAssertTrue(characterList.waitForExistence(timeout: 5))
+
+        // Then
+        let cells = characterList.cells
+        XCTAssertGreaterThan(cells.count, 0)
+    }
+
+    func testNavigationToCharacterDetail() throws {
+        // Given
+        let characterList = app.collectionViews.firstMatch
+        XCTAssertTrue(characterList.waitForExistence(timeout: 5))
+        let firstCharacter = characterList.buttons.firstMatch
+        XCTAssertTrue(firstCharacter.exists)
+
+        // When
+        firstCharacter.tap()
+
+        // Then
+        let detailView = app.navigationBars.firstMatch
+        XCTAssertTrue(detailView.waitForExistence(timeout: 3))
+        let backButton = app.navigationBars.buttons.element(boundBy: 0)
+        XCTAssertTrue(backButton.exists)
+    }
+
+    // MARK: - Search Tests
+
+    func testSearchFieldAppears() throws {
+        // When
+        let searchField = app.searchFields["Search characters..."]
+
+        // Then
+        XCTAssertTrue(searchField.waitForExistence(timeout: 5))
+    }
+
+    func testSearchFunctionality() throws {
+        // Given
+        let searchField = app.searchFields.firstMatch
+        XCTAssertTrue(searchField.waitForExistence(timeout: 5))
+
+        // When
+        searchField.tap()
+        searchField.typeText("Mickey")
+        sleep(2)
+
+        // Then
+        let characterList = app.collectionViews.firstMatch
+        XCTAssertTrue(characterList.exists)
+    }
+
+    func testSearchSuggestions() throws {
+        // Given
+        let searchField = app.searchFields.firstMatch
+        XCTAssertTrue(searchField.waitForExistence(timeout: 5))
+
+        // When
+        searchField.tap()
+
+        // Then
+        let suggestionsList = app.collectionViews.firstMatch
+        XCTAssertTrue(suggestionsList.waitForExistence(timeout: 2))
+    }
+
+    // MARK: - Detail View Tests
+
+    func testDetailViewDisplaysContent() throws {
+        // Given
+        let characterList = app.collectionViews.firstMatch
+
+        // When
+        characterList.buttons.firstMatch.tap()
+        sleep(1)
+
+        // Then
+        let scrollView = app.scrollViews.firstMatch
+        XCTAssertTrue(scrollView.exists)
+
+        let image = app.images.firstMatch
+        XCTAssertTrue(image.exists)
     }
 }

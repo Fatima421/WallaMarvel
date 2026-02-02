@@ -63,7 +63,7 @@ class CharacterRepositoryTests: XCTestCase {
         // Then
         XCTAssertEqual(result.id, 1)
         XCTAssertEqual(result.name, "Mickey Mouse")
-        XCTAssertEqual(result.imageUrl, "url")
+        XCTAssertEqual(result.imageUrl, "https://example.com/mickey.jpg")
     }
 
     func testGetCharacterDetailDataSourceFailsThrowsError() async {
