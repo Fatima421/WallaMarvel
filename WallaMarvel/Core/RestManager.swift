@@ -4,6 +4,7 @@ protocol RestManagerProtocol {
     func request<T: Decodable>(endpoint: Endpoint) async throws -> T
 }
 
+/// Handles all HTTP requests, building URLs, validating responses, and decoding results.
 final class RestManager: RestManagerProtocol {
     // MARK: - Properties
 

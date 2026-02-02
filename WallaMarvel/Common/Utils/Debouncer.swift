@@ -1,5 +1,6 @@
 import Foundation
 
+/// Delays execution of an action until a period of inactivity has passed.
 class Debouncer {
     private let delay: TimeInterval
     private var workItem: DispatchWorkItem?

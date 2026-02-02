@@ -1,5 +1,6 @@
 import SwiftUI
 
+/// Custom shape to round only specific corners
 struct RoundedCorner: Shape {
     var radius: CGFloat = .infinity
     var corners: UIRectCorner = .allCorners
