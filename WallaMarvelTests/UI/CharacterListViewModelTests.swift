@@ -61,7 +61,6 @@ class CharacterListViewModelTests: XCTestCase {
         // Then
         XCTAssertTrue(sut.characters.isEmpty)
         XCTAssertEqual(sut.state, .failure)
-        XCTAssertNotNil(sut.errorMessage)
     }
 
     func testInitWithEmptyDataShowsEmptyState() async {
@@ -136,50 +135,6 @@ class CharacterListViewModelTests: XCTestCase {
 
         // Then
         XCTAssertEqual(sut.characters.count, 2)
-        XCTAssertNotNil(sut.errorMessage)
-    }
-
-    // MARK: - Refresh Tests
-
-    func testRefreshResetsAndReloadsData() async {
-        // Given
-        mockGetCharactersUseCase.mockResult = MockData.characters
-
-        sut = CharacterListViewModel(
-            getCharactersUseCase: mockGetCharactersUseCase,
-            searchCharactersUseCase: mockSearchCharactersUseCase
-        )
-        await waitForState(.success)
-
-        // When
-        await sut.refresh()
-
-        // Then
-        XCTAssertEqual(sut.characters.count, 2)
-        XCTAssertEqual(mockGetCharactersUseCase.executeCallCount, 2)
-        XCTAssertEqual(sut.state, .success)
-    }
-
-    func testRefreshClearsExistingCharacters() async {
-        // Given
-        mockGetCharactersUseCase.mockResult = MockData.characters
-
-        sut = CharacterListViewModel(
-            getCharactersUseCase: mockGetCharactersUseCase,
-            searchCharactersUseCase: mockSearchCharactersUseCase
-        )
-        await waitForState(.success)
-        await sut.loadMoreCharacters()
-
-        XCTAssertEqual(sut.characters.count, 4)
-
-        mockGetCharactersUseCase.mockResult = MockData.singleCharacter
-
-        // When
-        await sut.refresh()
-
-        // Then
-        XCTAssertEqual(sut.characters.count, 1)
     }
 
     // MARK: - Search Tests

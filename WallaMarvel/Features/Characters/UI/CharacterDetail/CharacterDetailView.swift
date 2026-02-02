@@ -52,14 +52,5 @@ struct CharacterDetailView: View {
 }
 
 #Preview {
-    CharacterDetailView(
-        character: Character(
-            from: CharacterDataModel(
-                id: 1,
-                name: "Mickey Mouse",
-                imageUrl: "https://picsum.photos/200/300",
-                films: []
-            )
-        )
-    )
+    CharacterDetailView(character: MockData.character)
 }

@@ -14,4 +14,5 @@ enum MockData {
     )
 
     static let characters = Characters(from: charactersDataModel, currentPage: 1)
+    static let character = Character(from: charactersDataModel.data.first!)
 }

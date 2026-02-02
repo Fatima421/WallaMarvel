@@ -113,8 +113,8 @@ final class CharacterListViewModel: BaseViewModel {
                 canLoadMore = result.hasNextPage
             }
         } catch {
+            debugPrint("[ERROR] \(error.localizedDescription)")
             await MainActor.run {
-                errorMessage = error.localizedDescription
                 state = .failure
             }
         }

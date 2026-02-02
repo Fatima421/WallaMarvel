@@ -29,8 +29,9 @@ struct ImageView: View {
         Image(.placeholder)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(width: 80, height: 80)
-            .clipShape(RoundedRectangle(cornerRadius: 8))
+            .frame(width: width, height: height)
+            .frame(maxWidth: maxWidth)
+            .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
             .accessibilityLabel("Placeholder image")
     }
 }
