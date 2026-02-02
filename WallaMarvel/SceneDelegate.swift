@@ -9,11 +9,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let window = UIWindow(windowScene: windowScene)
         
+        let viewController = ListHeroesViewController()
         let presenter = ListHeroesPresenter()
-        let listHeroesViewController = ListHeroesViewController()
-        listHeroesViewController.presenter = presenter
         
-        let navigationController = UINavigationController(rootViewController: listHeroesViewController)
+        viewController.presenter = presenter
+        presenter.view = viewController
+        
+        let navigationController = UINavigationController(rootViewController: viewController)
         window.rootViewController = navigationController
         self.window = window
         self.window?.makeKeyAndVisible()
