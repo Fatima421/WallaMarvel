@@ -11,6 +11,9 @@ struct CharacterDetailView: View {
                     height: 350,
                     maxWidth: UIScreen.main.bounds.width,
                     cornerRadius: 0)
+                .accessibilityElement()
+                .accessibilityLabel("Large photo of \(character.name)")
+                
                 informationSection
                     .offset(y: -30)
             }
@@ -26,11 +29,18 @@ struct CharacterDetailView: View {
                 Text("Films")
                     .font(.title2)
                     .fontWeight(.bold)
+                    .accessibilityAddTraits(.isHeader)
                 
                 ForEach(character.films, id: \.self) { film in
                     Text(film)
                         .font(.headline)
+                        .accessibilityLabel("Film: \(film)")
                 }
+            } else {
+                Text("No films available")
+                    .font(.headline)
+                    .foregroundColor(.secondary)
+                    .accessibilityLabel("This character has no films listed")
             }
         }
         .padding(Spacing.medium)

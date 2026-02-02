@@ -31,6 +31,7 @@ struct ImageView: View {
             .aspectRatio(contentMode: .fill)
             .frame(width: 80, height: 80)
             .clipShape(RoundedRectangle(cornerRadius: 8))
+            .accessibilityLabel("Placeholder image")
     }
 }
 

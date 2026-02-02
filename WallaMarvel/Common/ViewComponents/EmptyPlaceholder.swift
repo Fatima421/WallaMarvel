@@ -37,6 +37,15 @@ enum EmptyPlaceholderType {
             "Error loading information, please try again later"
         }
     }
+    
+    var accessibilityImageLabel: String {
+        switch self {
+        case .empty:
+            "Empty state illustration"
+        case .error:
+            "Error illustration"
+        }
+    }
 }
 
 struct EmptyPlaceholder: View {
@@ -55,12 +64,15 @@ struct EmptyPlaceholder: View {
             type.image
                 .style(size: 150)
                 .padding(.bottom, Spacing.small)
+                .accessibilityLabel(type.accessibilityImageLabel)
             
             if case .error(let retry) = type {
                 Button("Try again") {
                     retry()
                 }
                 .buttonStyle(.bordered)
+                .accessibilityLabel("Try again button")
+                .accessibilityHint("Double tap to retry loading")
             }
         }
         .frame(maxHeight: .infinity, alignment: .top)

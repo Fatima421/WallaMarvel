@@ -28,6 +28,8 @@ struct CharacterListView: View {
     private var loadingView: some View {
         characterList(MockData.characters.data)
             .redacted(reason: .placeholder)
+            .accessibilityElement()
+            .accessibilityLabel("Loading characters")
     }
     
     private var emptyView: some View {
@@ -66,6 +68,8 @@ struct CharacterListView: View {
                         }
                     }
             }
+            .accessibilityLabel("Character \(character.name)")
+            .accessibilityHint("Double tap to view details")
         }
         .navigationDestination(for: Character.self) { character in
             CharacterDetailView(character: character)
@@ -83,6 +87,7 @@ struct CharacterListView: View {
         List(viewModel.suggestionsList, id: \.self) { suggestion in
             Text(suggestion)
                 .searchCompletion(suggestion)
+                .accessibilityLabel("Search for \(suggestion)")
         }
     }
     
