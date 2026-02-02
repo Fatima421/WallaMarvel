@@ -1,10 +1,3 @@
-//
-//  BaseView.swift
-//  WallaMarvel
-//
-//  Created by Fatima Syed on 1/2/26.
-//
-
 import SwiftUI
 
 enum ViewState {

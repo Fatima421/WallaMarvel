@@ -6,8 +6,6 @@ protocol CharacterDataSourceProtocol {
     func searchCharacters(name: String, page: Int) async throws -> CharactersDataModel
 }
 
-// MARK: - CharacterDataSource
-
 final class CharacterDataSource: CharacterDataSourceProtocol {
     
     // MARK: - Properties

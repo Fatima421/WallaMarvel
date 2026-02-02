@@ -2,7 +2,6 @@ import Foundation
 
 enum NetworkError: Error, LocalizedError {
     case invalidURL
-    case noData
     case decodingError
     case serverError
     case unknown
@@ -13,8 +12,6 @@ enum NetworkError: Error, LocalizedError {
         switch self {
         case .invalidURL:
             return "Invalid URL"
-        case .noData:
-            return "No data received from server"
         case .decodingError:
             return "Failed to decode response"
         case .serverError:

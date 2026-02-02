@@ -237,13 +237,21 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		AD400BD02F311A2700F5A759 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				1A821EC42862FD470024D397 /* CharacterList */,
+				1A821EC52862FD500024D397 /* CharacterDetail */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		AD4940962F2D1C680024249A /* Characters */ = {
 			isa = PBXGroup;
 			children = (
 				1A821EC72862FD6E0024D397 /* Data */,
 				1A821EC62862FD650024D397 /* Domain */,
-				1A821EC42862FD470024D397 /* CharacterList */,
-				1A821EC52862FD500024D397 /* CharacterDetail */,
+				AD400BD02F311A2700F5A759 /* UI */,
 			);
 			path = Characters;
 			sourceTree = "<group>";

@@ -83,14 +83,6 @@ struct CharacterListView: View {
         }
     }
     
-    private var suggestionsSection: some View {
-        List(viewModel.suggestionsList, id: \.self) { suggestion in
-            Text(suggestion)
-                .searchCompletion(suggestion)
-                .accessibilityLabel("Search for \(suggestion)")
-        }
-    }
-    
     private func row(_ character: Character) -> some View {
         HStack(spacing: Spacing.medium) {
             ImageView(
@@ -102,6 +94,14 @@ struct CharacterListView: View {
             
             Text(character.name)
                 .font(.headline)
+        }
+    }
+    
+    private var suggestionsSection: some View {
+        List(viewModel.suggestionsList, id: \.self) { suggestion in
+            Text(suggestion)
+                .searchCompletion(suggestion)
+                .accessibilityLabel("Search for \(suggestion)")
         }
     }
 }

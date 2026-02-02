@@ -14,6 +14,8 @@ final class CharacterListViewModel: BaseViewModel {
     private var currentPage = 1
     private var canLoadMore = false
     private var cachedCharacters: [Character] = []
+    private var cachedPage: Int = 1
+    private var cachedCanLoadMore: Bool = false
     let suggestionsList: [String]
     
     // MARK: - Initializer
@@ -47,6 +49,8 @@ final class CharacterListViewModel: BaseViewModel {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
             characters = cachedCharacters
+            currentPage = cachedPage
+            canLoadMore = cachedCanLoadMore
             state = .success
             return
         }
@@ -57,6 +61,9 @@ final class CharacterListViewModel: BaseViewModel {
         
         debouncer.debounce { [weak self] in
             self?.cachedCharacters = self?.characters ?? []
+            self?.cachedPage = self?.currentPage ?? 1
+            self?.cachedCanLoadMore = self?.canLoadMore ?? false
+
             self?.currentPage = 1
             self?.characters = []
             self?.canLoadMore = false

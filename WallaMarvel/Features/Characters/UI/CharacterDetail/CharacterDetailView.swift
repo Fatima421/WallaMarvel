@@ -39,13 +39,13 @@ struct CharacterDetailView: View {
             } else {
                 Text("No films available")
                     .font(.headline)
-                    .foregroundColor(.secondary)
+                    .foregroundStyle(.secondary)
                     .accessibilityLabel("This character has no films listed")
             }
         }
         .padding(Spacing.medium)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(.white)
+        .background(Color(.neutral))
         .clipShape(RoundedCorner(radius: 16, corners: [.topLeft, .topRight]))
     }
 }
