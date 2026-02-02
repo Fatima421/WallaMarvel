@@ -12,6 +12,6 @@ enum MockData {
             CharacterDataModel(id: 6, name: "Woody", imageUrl: "url6", films: [])
         ]
     )
-        
+
     static let characters = Characters(from: charactersDataModel, currentPage: 1)
 }

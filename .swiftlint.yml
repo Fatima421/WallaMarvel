@@ -1,0 +1,8 @@
+# By default, SwiftLint uses a set of sensible default rules you can adjust:
+line_length:
+  warning: 160
+  ignores_comments: true
+  ignores_urls: true
+  
+excluded:
+- coverage

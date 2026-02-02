@@ -1,7 +1,6 @@
 import XCTest
 
 class WallaMarvelUITestsLaunchTests: XCTestCase {
-
     override class var runsForEachTargetApplicationUIConfiguration: Bool {
         true
     }

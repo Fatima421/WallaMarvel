@@ -5,7 +5,6 @@ protocol SearchCharactersUseCaseProtocol {
 }
 
 final class SearchCharactersUseCase: SearchCharactersUseCaseProtocol {
-
     // MARK: - Properties
 
     private let repository: CharacterRepositoryProtocol

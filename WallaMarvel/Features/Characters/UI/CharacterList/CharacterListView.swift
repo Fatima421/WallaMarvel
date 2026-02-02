@@ -24,18 +24,18 @@ struct CharacterListView: View {
             }
         }
     }
-    
+
     private var loadingView: some View {
         characterList(MockData.characters.data)
             .redacted(reason: .placeholder)
             .accessibilityElement()
             .accessibilityLabel("Loading characters")
     }
-    
+
     private var emptyView: some View {
         EmptyPlaceholder(type: .empty)
     }
-    
+
     private var errorView: some View {
         EmptyPlaceholder(type: .error {
             Task {
@@ -43,7 +43,7 @@ struct CharacterListView: View {
             }
         })
     }
-    
+
     private var content: some View {
         Group {
             if isSearching, viewModel.searchText.isEmpty {
@@ -55,7 +55,7 @@ struct CharacterListView: View {
             }
         }
     }
-    
+
     private func characterList(_ characters: [Character]) -> some View {
         List(characters, id: \.self) { character in
             NavigationLink(value: character) {
@@ -82,7 +82,7 @@ struct CharacterListView: View {
             }
         }
     }
-    
+
     private func row(_ character: Character) -> some View {
         HStack(spacing: Spacing.medium) {
             ImageView(
@@ -91,12 +91,12 @@ struct CharacterListView: View {
                 height: 80,
                 cornerRadius: 8
             )
-            
+
             Text(character.name)
                 .font(.headline)
         }
     }
-    
+
     private var suggestionsSection: some View {
         List(viewModel.suggestionsList, id: \.self) { suggestion in
             Text(suggestion)

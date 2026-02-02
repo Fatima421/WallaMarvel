@@ -1,9 +1,8 @@
 import Foundation
 
 final class CharacterListViewModel: BaseViewModel {
-    
     // MARK: - Properties
-    
+
     @Published var characters: [Character] = []
     @Published var isLoadingMore = false
     @Published var searchText: String = ""
@@ -17,9 +16,9 @@ final class CharacterListViewModel: BaseViewModel {
     private var cachedPage: Int = 1
     private var cachedCanLoadMore: Bool = false
     let suggestionsList: [String]
-    
+
     // MARK: - Initializer
-    
+
     init(
         getCharactersUseCase: GetCharactersUseCaseProtocol = AppContainer.shared.makeGetCharactersUseCase(),
         searchCharactersUseCase: SearchCharactersUseCaseProtocol = AppContainer.shared.makeSearchCharactersUseCase()
@@ -27,7 +26,7 @@ final class CharacterListViewModel: BaseViewModel {
         self.getCharactersUseCase = getCharactersUseCase
         self.searchCharactersUseCase = searchCharactersUseCase
 
-        self.suggestionsList = [
+        suggestionsList = [
             "Mickey Mouse",
             "Barbie",
             "Elsa",
@@ -35,16 +34,16 @@ final class CharacterListViewModel: BaseViewModel {
             "Ariel",
             "Woody"
         ]
-        
+
         super.init()
-        
+
         Task {
             await loadCharacters()
         }
     }
-    
+
     // MARK: - User actions
-    
+
     func onSearchTextChanged() {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
@@ -54,11 +53,11 @@ final class CharacterListViewModel: BaseViewModel {
             state = .success
             return
         }
-        
+
         if state == .none || state == .success {
             state = .loading
         }
-        
+
         debouncer.debounce { [weak self] in
             self?.cachedCharacters = self?.characters ?? []
             self?.cachedPage = self?.currentPage ?? 1
@@ -67,18 +66,18 @@ final class CharacterListViewModel: BaseViewModel {
             self?.currentPage = 1
             self?.characters = []
             self?.canLoadMore = false
-            
+
             Task {
                 await self?.loadCharacters()
             }
         }
     }
-    
+
     // MARK: - Load data
-    
+
     func loadCharacters() async {
         guard state != .loading || !searchText.isEmpty else { return }
-        
+
         await MainActor.run {
             if state == .none || state == .success {
                 state = .loading
@@ -87,28 +86,26 @@ final class CharacterListViewModel: BaseViewModel {
 
         await fetchCharacters()
     }
-    
+
     func loadMoreCharacters() async {
         guard !isLoadingMore, state != .loading, canLoadMore else { return }
-        
+
         await MainActor.run { isLoadingMore = true }
-        
+
         await fetchCharacters()
-        
+
         await MainActor.run { isLoadingMore = false }
     }
-    
+
     private func fetchCharacters() async {
         do {
             let nextPage = canLoadMore ? currentPage + 1 : currentPage
-            let result: Characters
-            
-            if !searchText.isEmpty {
-                result = try await searchCharactersUseCase.execute(name: searchText, page: nextPage)
+            let result: Characters = if !searchText.isEmpty {
+                try await searchCharactersUseCase.execute(name: searchText, page: nextPage)
             } else {
-                result = try await getCharactersUseCase.execute(page: nextPage)
+                try await getCharactersUseCase.execute(page: nextPage)
             }
-            
+
             await MainActor.run {
                 currentPage = nextPage
                 state = result.data.isEmpty ? .empty : .success
@@ -122,7 +119,7 @@ final class CharacterListViewModel: BaseViewModel {
             }
         }
     }
-    
+
     func refresh() async {
         await MainActor.run {
             currentPage = 1

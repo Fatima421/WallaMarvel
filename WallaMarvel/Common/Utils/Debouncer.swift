@@ -16,7 +16,7 @@ class Debouncer {
             action()
             self?.workItem = nil
         }
-        if let workItem = workItem {
+        if let workItem {
             queue.asyncAfter(deadline: .now() + delay, execute: workItem)
         }
     }

@@ -8,36 +8,36 @@ enum Endpoint {
     var path: String {
         switch self {
         case .getCharacters, .searchCharacters:
-            return "/character"
-        case .getCharacterBy(let id):
-            return "/character/\(id)"
+            "/character"
+        case let .getCharacterBy(id):
+            "/character/\(id)"
         }
     }
-    
+
     var method: String {
         switch self {
         case .getCharacters, .getCharacterBy, .searchCharacters:
-            return "GET"
+            "GET"
         }
     }
-    
+
     var queryParams: [String: String]? {
         switch self {
         case let .getCharacters(page):
-            return [
+            [
                 "page": "\(page)",
                 "pageSize": "25"
             ]
 
         case let .searchCharacters(name, page):
-            return [
+            [
                 "name": name,
                 "page": "\(page)",
                 "pageSize": "25"
             ]
 
         default:
-            return nil
+            nil
         }
     }
 }

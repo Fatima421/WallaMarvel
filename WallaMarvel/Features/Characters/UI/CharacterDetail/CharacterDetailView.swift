@@ -2,7 +2,7 @@ import SwiftUI
 
 struct CharacterDetailView: View {
     let character: Character
-    
+
     var body: some View {
         ScrollView {
             VStack(alignment: .leading, spacing: Spacing.large) {
@@ -10,10 +10,11 @@ struct CharacterDetailView: View {
                     imageUrl: character.imageUrl,
                     height: 350,
                     maxWidth: UIScreen.main.bounds.width,
-                    cornerRadius: 0)
+                    cornerRadius: 0
+                )
                 .accessibilityElement()
                 .accessibilityLabel("Large photo of \(character.name)")
-                
+
                 informationSection
                     .offset(y: -30)
             }
@@ -22,7 +23,7 @@ struct CharacterDetailView: View {
         .navigationTitle(character.name)
         .navigationBarTitleDisplayMode(.inline)
     }
-    
+
     private var informationSection: some View {
         VStack(alignment: .leading, spacing: Spacing.medium) {
             if !character.films.isEmpty {
@@ -30,7 +31,7 @@ struct CharacterDetailView: View {
                     .font(.title2)
                     .fontWeight(.bold)
                     .accessibilityAddTraits(.isHeader)
-                
+
                 ForEach(character.films, id: \.self) { film in
                     Text(film)
                         .font(.headline)

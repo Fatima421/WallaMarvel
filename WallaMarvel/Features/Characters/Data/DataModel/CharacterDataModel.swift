@@ -5,7 +5,7 @@ struct CharacterDataModel: Decodable {
     let name: String
     let imageUrl: String?
     let films: [String]
-    
+
     enum CodingKeys: String, CodingKey {
         case id = "_id"
         case name

@@ -7,9 +7,9 @@ struct Character: Decodable, Hashable {
     let films: [String]
 
     init(from response: CharacterDataModel) {
-        self.id = response.id
-        self.name = response.name
-        self.imageUrl = response.imageUrl
-        self.films = response.films
+        id = response.id
+        name = response.name
+        imageUrl = response.imageUrl
+        films = response.films
     }
 }

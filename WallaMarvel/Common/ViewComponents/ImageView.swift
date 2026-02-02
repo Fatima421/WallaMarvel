@@ -1,5 +1,5 @@
-import SwiftUI
 import SDWebImageSwiftUI
+import SwiftUI
 
 struct ImageView: View {
     let imageUrl: String?
@@ -7,7 +7,7 @@ struct ImageView: View {
     var height: CGFloat?
     var maxWidth: CGFloat?
     var cornerRadius: CGFloat
-    
+
     var body: some View {
         if let imageUrl, let url = URL(string: imageUrl) {
             WebImage(url: url) { image in
@@ -24,7 +24,7 @@ struct ImageView: View {
             placeholder
         }
     }
-    
+
     private var placeholder: some View {
         Image(.placeholder)
             .resizable()
