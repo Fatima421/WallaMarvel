@@ -1,4 +1,4 @@
-import SDWebImageSwiftUI
+import Kingfisher
 import SwiftUI
 
 struct ImageView: View {
@@ -10,16 +10,15 @@ struct ImageView: View {
 
     var body: some View {
         if let imageUrl, let url = URL(string: imageUrl) {
-            WebImage(url: url) { image in
-                image
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: width, height: height)
-                    .frame(maxWidth: maxWidth)
-                    .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
-            } placeholder: {
-                placeholder
-            }
+            KFImage(url)
+                .placeholder {
+                    placeholder
+                }
+                .resizable()
+                .aspectRatio(contentMode: .fill)
+                .frame(width: width, height: height)
+                .frame(maxWidth: maxWidth)
+                .clipShape(RoundedRectangle(cornerRadius: cornerRadius))
         } else {
             placeholder
         }

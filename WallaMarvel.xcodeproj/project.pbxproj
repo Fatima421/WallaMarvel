@@ -19,6 +19,7 @@
 		AD0979172F2D666800D5501A /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0979162F2D666800D5501A /* CharacterListViewModel.swift */; };
 		AD0979192F2D676100D5501A /* CharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0979182F2D676100D5501A /* CharacterListView.swift */; };
 		AD09791B2F2D6C5300D5501A /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD09791A2F2D6C5300D5501A /* AppContainer.swift */; };
+		AD400BD72F31643C00F5A759 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AD400BD62F31643C00F5A759 /* Kingfisher */; };
 		AD49409C2F2D1DA50024249A /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49409A2F2D1DA50024249A /* Characters.swift */; };
 		AD49409D2F2D1DA50024249A /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49409B2F2D1DA50024249A /* Character.swift */; };
 		AD49409F2F2D60EF0024249A /* GetCharacterUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49409E2F2D60EF0024249A /* GetCharacterUseCase.swift */; };
@@ -31,7 +32,6 @@
 		ADD0BAB92F2D791E000653ED /* MockCharacterDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAB82F2D791E000653ED /* MockCharacterDataSource.swift */; };
 		ADD0BAC12F2E23F4000653ED /* WallaMarvelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC02F2E23F4000653ED /* WallaMarvelApp.swift */; };
 		ADD0BAC52F2E9971000653ED /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC42F2E9971000653ED /* ImageView.swift */; };
-		ADD0BAC82F2E9999000653ED /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = ADD0BAC72F2E9999000653ED /* SDWebImageSwiftUI */; };
 		ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BAC92F2F827C000653ED /* CharacterDetailView.swift */; };
 		ADD0BACC2F2F8C95000653ED /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADD0BACB2F2F8C95000653ED /* LaunchScreen.storyboard */; };
 		ADD0BACF2F2F8F05000653ED /* SearchCharactersUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD0BACE2F2F8F05000653ED /* SearchCharactersUseCase.swift */; };
@@ -117,7 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADD0BAC82F2E9999000653ED /* SDWebImageSwiftUI in Frameworks */,
+				AD400BD72F31643C00F5A759 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,7 +486,7 @@
 			);
 			mainGroup = 1A0E3A8C2862F7E200132FCB;
 			packageReferences = (
-				ADD0BAC62F2E9999000653ED /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */,
+				AD400BD52F31643C00F5A759 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 1A0E3A962862F7E200132FCB /* Products */;
 			projectDirPath = "";
@@ -931,21 +931,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		ADD0BAC62F2E9999000653ED /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */ = {
+		AD400BD52F31643C00F5A759 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/SDWebImage/SDWebImageSwiftUI.git";
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 3.1.4;
+				minimumVersion = 8.6.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		ADD0BAC72F2E9999000653ED /* SDWebImageSwiftUI */ = {
+		AD400BD62F31643C00F5A759 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = ADD0BAC62F2E9999000653ED /* XCRemoteSwiftPackageReference "SDWebImageSwiftUI" */;
-			productName = SDWebImageSwiftUI;
+			package = AD400BD52F31643C00F5A759 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

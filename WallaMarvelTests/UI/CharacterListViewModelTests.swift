@@ -210,18 +210,22 @@ class CharacterListViewModelTests: XCTestCase {
         )
         await waitForState(.success)
 
+        let initialCharacters = sut.characters
+
         // Search
         sut.searchText = "Mickey"
         sut.onSearchTextChanged()
         try? await Task.sleep(nanoseconds: 400_000_000)
         await waitForState(.success)
 
-        // When
+        XCTAssertNotEqual(sut.characters, initialCharacters)
+
+        // Clear
         sut.searchText = ""
         sut.onSearchTextChanged()
 
-        // Then
-        XCTAssertEqual(sut.characters.count, 2)
+        XCTAssertEqual(sut.characters, initialCharacters)
         XCTAssertEqual(sut.state, .success)
+        XCTAssertEqual(mockGetCharactersUseCase.executeCallCount, 1)
     }
 }
