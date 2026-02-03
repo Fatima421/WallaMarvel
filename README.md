@@ -7,7 +7,8 @@ A Disney character browsing app showing different architectural approaches and m
 This project showcases two separate approaches to building the same app:
 
 1. **`main` branch** - Refactoring and fixing existing UIKit codebase while keeping the architecture clean.
-2. **`new-version` branch** - A modern SwiftUI implementation using async/await with MVVM + Clean Architecture.
+2. **`new-version` branch** - A modern SwiftUI implementation using async/await with MVVM + Clean Architecture. 
+[📖 Full Documentation](https://github.com/Fatima421/WallaMarvel/blob/new-version/Documentation.md)
 
 ### API Change: Marvel → Disney
 
