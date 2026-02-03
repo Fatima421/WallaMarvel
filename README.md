@@ -4,10 +4,26 @@ A Disney character browsing app showing different architectural approaches and m
 
 ## Project Overview
 
-This project has two separate approaches to building the same app:
+This project showcases two separate approaches to building the same app:
 
 1. **`main` branch** - Refactoring and fixing existing UIKit codebase while keeping the architecture clean.
 2. **`new-version` branch** - A modern SwiftUI implementation using async/await with MVVM + Clean Architecture.
+
+### API Change: Marvel → Disney
+
+**Important Note**: The original codebase was designed to use the Marvel API. During development, I was informed that the Marvel API was not working properly, so I had to look for an alternative.
+
+After evaluating options, I switched to the **[Disney API](https://disneyapi.dev/)** for the following reasons:
+
+- **Similar structure**: Provides characters with detailed info like name, image, films, etc.
+- **Pagination support**: Built-in pagination
+- **Free and reliable**: No authentication issues, stable endpoints
+- **Character-focused**: Same concept of browsing and viewing character details
+- **Limited detail info**: While Disney characters have fewer details than Marvel heroes the API structure is similar enough to demonstrate the same architectural patterns
+
+**Why Disney API was the right choice**:
+
+It was the closest alternative for character-based content and allowed me to demonstrate technical concepts like search, detail views, and pagination while handling an API change scenario.
 
 ---
 
