@@ -55,9 +55,19 @@ SwiftUI was chosen to modernize the previous UIKit based implementation.
 
 ## Refactoring Journey
 
-1. **Started with basic API integration** → Separated into layers (Data/Domain/UI)
-2. **Had separate search view** → Merged into character list to avoid duplication
-3. **Duplicated state management** → Created BaseView/BaseViewModel
-4. **Manual image loading** → Switched to SDWebImage for reliability
-5. **Poor error handling** → Added retry actions and proper error states
-6. **Missing accessibility** → Added labels and hints throughout
+**Created data layer foundation** → Built DataSource, Repository, and UseCases with proper separation (and new API)
+**Fixed API models and separated layers** → Refined data models and split API logic properly
+**Migrated UI from UIKit to SwiftUI** → Deleted old UI and created new SwiftUI views with ViewModels
+**Added comprehensive testing** → Implemented unit tests for repositories, data sources, and ViewModels
+**Built character list and detail views** → Created main features with proper ViewModel integration
+**Created separate search feature** → Initially built as standalone view with its own logic
+**Merged search into character list** → Consolidated to avoid code duplication since both shared same layout/pagination
+**Implemented state management** → Added handling for loading, empty, and error cases with BaseView/BaseViewModel
+**Enhanced error handling** → Added retry actions on failures
+**Improved UI/UX** → Refined character detail view, created launch screen, added accent color and dark mode support
+**Added accessibility support** → Implemented VoiceOver labels and hints throughout the app
+**Applied code quality tools** → Integrated SwiftLint and SwiftFormat for consistent style
+**Fixed console warnings** → Resolved URL handling issues to clean up logs
+**Switched to Kingfisher** → Replaced manual image loading with Kingfisher library for better caching and reliability
+**Added UI tests** → Implemented automated UI testing for key flows
+**Code cleanup** → Removed redundant code and added clarifying comments where needed
