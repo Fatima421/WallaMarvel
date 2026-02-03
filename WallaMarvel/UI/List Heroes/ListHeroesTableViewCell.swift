@@ -27,7 +27,7 @@ final class ListHeroesTableViewCell: UITableViewCell {
     
     private func setup() {
         addSubviews()
-        addContraints()
+        addConstraints()
     }
     
     private func addSubviews() {
@@ -35,16 +35,18 @@ final class ListHeroesTableViewCell: UITableViewCell {
         addSubview(heroeName)
     }
     
-    private func addContraints() {
+    private func addConstraints() {
         NSLayoutConstraint.activate([
             heroeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 12),
             heroeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 12),
-            heroeImageView.heightAnchor.constraint(equalToConstant: 80),
             heroeImageView.widthAnchor.constraint(equalToConstant: 80),
+            heroeImageView.heightAnchor.constraint(equalToConstant: 80),
             heroeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -12),
             
             heroeName.leadingAnchor.constraint(equalTo: heroeImageView.trailingAnchor, constant: 12),
-            heroeName.topAnchor.constraint(equalTo: heroeImageView.topAnchor, constant: 8),
+            heroeName.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -12),
+            heroeName.topAnchor.constraint(equalTo: topAnchor, constant: 12),
+            heroeName.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -12)
         ])
     }
     

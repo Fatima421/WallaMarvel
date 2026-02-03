@@ -51,6 +51,13 @@ extension ListHeroesViewController: ListHeroesViewProtocol {
     func setTitle(_ title: String) {
         self.title = title
     }
+    
+    func navigateToDetail(character: CharacterDataModel) {
+        let detailViewController = CharacterDetailViewController(character: character)
+        //detailViewController.title = character.name
+        //detailViewController.navigationItem.largeTitleDisplayMode = .never
+        navigationController?.pushViewController(detailViewController, animated: true)
+    }
 }
 
 // MARK: - UITableViewDataSource

@@ -13,6 +13,7 @@ protocol ListHeroesViewProtocol: AnyObject {
     func showHeroes()
     func showError(message: String)
     func setTitle(_ title: String)
+    func navigateToDetail(character: CharacterDataModel)
 }
 
 final class ListHeroesPresenter: ListHeroesPresenterProtocol {
@@ -31,8 +32,9 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     }
     
     func didSelectHero(at index: Int) {
-        // TODO: Navigate to detail
-        print("Selected hero: \(heroes[index].name)")
+        guard index < heroes.count else { return }
+        let selectedHero = heroes[index]
+        view?.navigateToDetail(character: selectedHero)
     }
     
     func numberOfHeroes() -> Int {
