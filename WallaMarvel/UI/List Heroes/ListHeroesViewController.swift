@@ -4,7 +4,12 @@ final class ListHeroesViewController: UIViewController {
     
     // MARK: - Properties
     
-    var mainView: ListHeroesView { return view as! ListHeroesView }
+    var mainView: ListHeroesView { 
+        guard let listView = view as? ListHeroesView else {
+            fatalError("View is not of type ListHeroesView")
+        }
+        return listView
+    }
     var presenter: ListHeroesPresenterProtocol?
     private var adapter: ListHeroesAdapter?
     
