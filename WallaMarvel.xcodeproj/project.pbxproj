@@ -237,6 +237,14 @@
 			path = UseCases;
 			sourceTree = "<group>";
 		};
+		AD0F80C12F32429B00B3F0E5 /* ViewModifier */ = {
+			isa = PBXGroup;
+			children = (
+				ADD0BAEE2F3002B4000653ED /* RoundedCorner.swift */,
+			);
+			path = ViewModifier;
+			sourceTree = "<group>";
+		};
 		AD400BD02F311A2700F5A759 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +339,7 @@
 				ADD0BAD82F2FCEBD000653ED /* Utils */,
 				ADD0BAE42F2FD84C000653ED /* Styles */,
 				ADD0BAC32F2E995D000653ED /* ViewComponents */,
+				AD0F80C12F32429B00B3F0E5 /* ViewModifier */,
 				ADD0BAE02F2FD648000653ED /* MockData.swift */,
 			);
 			path = Common;
@@ -341,7 +350,6 @@
 			children = (
 				ADD0BAE22F2FD808000653ED /* EmptyPlaceholder.swift */,
 				ADD0BAC42F2E9971000653ED /* ImageView.swift */,
-				ADD0BAEE2F3002B4000653ED /* RoundedCorner.swift */,
 			);
 			path = ViewComponents;
 			sourceTree = "<group>";
