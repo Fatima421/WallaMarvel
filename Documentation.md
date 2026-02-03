@@ -14,11 +14,10 @@ This document explains key architectural and implementation decisions made durin
 **Why**: Repositories act as a boundary between the domain and data layers, keeping UseCases unaware of how data is fetched (network, cache, etc.). It also makes it easier to swap implementations (mock for testing, real API for production) without changing UseCases.
 
 ### API Client and Rest Manager
-**Why**: Initially, APIClient handled everything (URL building, networking, decoding, errors). I split responsibilities into APIClient that defines domain-specific requests (characters, search, etc.) and 
-RestManager that handles generic networking (building requests, executing HTTP calls, validating responses, decoding). This keeps networking reusable, simplifies APIClient, and makes the code easier to read and maintain.
+**Why**: Initially, APIClient handled everything (URL building, networking, decoding, errors). I split responsibilities into APIClient that defines domain-specific requests (characters, search, etc.) and RestManager that handles generic networking (building requests, executing HTTP calls, validating responses, decoding). This keeps networking reusable, simplifies APIClient, and makes the code easier to read and maintain.
 
 ### App container
-**Why**: Created to centralize dependency creation and avoid constructing dependencies inside ViewModels or UseCases.
+**Why**: Created to centralize dependency injection and avoid constructing dependencies inside ViewModels or UseCases.
 
 ## Implementation Decisions
 
@@ -46,7 +45,7 @@ SwiftUI was chosen to modernize the previous UIKit based implementation.
 **Why**: UseCases and repositories depend on protocols, making it easy to inject mocks for unit tests.
 
 ### Unit Tests
-**Why**: ViewModels contain most presentation and business logic, so testing them ensures core user flows work correctly. In addition, I added unit tests for Repositories and DataSources to verify data mapping, error propagation, and integration between layers. This helps catch issues early in the data flow and gives confidence that each layer behaves correctly in isolation.
+**Why**: I focused on testing the ViewModel as it contains most of the presentation and business logic, ensuring core user flows work correctly. In addition, I added unit tests for Repositories and DataSources to verify data mapping, error propagation, and integration between layers. This helps catch issues early in the data flow and gives confidence that each layer behaves correctly in isolation.
 
 ## Code Quality Decisions
 
