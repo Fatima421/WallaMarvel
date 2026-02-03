@@ -18,7 +18,7 @@ This document explains key architectural and implementation decisions made durin
 RestManager that handles generic networking (building requests, executing HTTP calls, validating responses, decoding). This keeps networking reusable, simplifies APIClient, and makes the code easier to read and maintain.
 
 ### App container
-**Why** Created to centralize dependency creation and avoid constructing dependencies inside ViewModels or UseCases.
+**Why**: Created to centralize dependency creation and avoid constructing dependencies inside ViewModels or UseCases.
 
 ## Implementation Decisions
 
@@ -35,7 +35,7 @@ SwiftUI was chosen to modernize the previous UIKit based implementation.
 **Why**: I decided to have a data model and then a separated model (entity) for our app. Even though it's a small app I wanted to separate the two layers, this also made it easier for me to then read the pagination info directly from Characters.
 
 ### Search
-**Why** Search is integrated directly into the character list instead of having a separate screen. Both share the same layout, pagination, and ViewModel logic, so merging them avoided duplication and simplified the flow.
+**Why**: Search is integrated directly into the character list instead of having a separate screen. Both share the same layout, pagination, and ViewModel logic, so merging them avoided duplication and simplified the flow.
 
 ### Accessibility Labels Throughout
 **Why**: Added accessibility labels and hints throughout to support VoiceOver, important for usability and accessibility compliance.
@@ -55,19 +55,19 @@ SwiftUI was chosen to modernize the previous UIKit based implementation.
 
 ## Refactoring Journey
 
-**Created data layer foundation** → Built DataSource, Repository, and UseCases with proper separation (and new API)
-**Fixed API models and separated layers** → Refined data models and split API logic properly
-**Migrated UI from UIKit to SwiftUI** → Deleted old UI and created new SwiftUI views with ViewModels
-**Added comprehensive testing** → Implemented unit tests for repositories, data sources, and ViewModels
-**Built character list and detail views** → Created main features with proper ViewModel integration
-**Created separate search feature** → Initially built as standalone view with its own logic
-**Merged search into character list** → Consolidated to avoid code duplication since both shared same layout/pagination
-**Implemented state management** → Added handling for loading, empty, and error cases with BaseView/BaseViewModel
-**Enhanced error handling** → Added retry actions on failures
-**Improved UI/UX** → Refined character detail view, created launch screen, added accent color and dark mode support
-**Added accessibility support** → Implemented VoiceOver labels and hints throughout the app
-**Applied code quality tools** → Integrated SwiftLint and SwiftFormat for consistent style
-**Fixed console warnings** → Resolved URL handling issues to clean up logs
-**Switched to Kingfisher** → Replaced manual image loading with Kingfisher library for better caching and reliability
-**Added UI tests** → Implemented automated UI testing for key flows
-**Code cleanup** → Removed redundant code and added clarifying comments where needed
+- **Created data layer foundation** → Built DataSource, Repository, and UseCases with proper separation
+- **Fixed API models and separated layers** → Refined data models and split API logic properly
+- **Migrated UI from UIKit to SwiftUI** → Deleted old UI and created new SwiftUI views with ViewModels
+- **Added comprehensive testing** → Implemented unit tests for repositories, data sources, and ViewModels
+- **Built character list and detail views** → Created main features with proper ViewModel integration
+- **Created separate search feature** → Initially built as standalone view with its own logic
+- **Merged search into character list** → Consolidated to avoid code duplication since both shared same layout/pagination
+- **Implemented state management** → Added handling for loading, empty, and error cases with BaseView/BaseViewModel
+- **Enhanced error handling** → Added retry actions on failures
+- **Improved UI/UX** → Refined character detail view, created launch screen, added accent color and dark mode support
+- **Added accessibility support** → Implemented VoiceOver labels and hints throughout the app
+- **Applied code quality tools** → Integrated SwiftLint and SwiftFormat for consistent style
+- **Fixed console warnings** → Resolved URL handling issues to clean up logs
+- **Switched to Kingfisher** → Replaced manual image loading with Kingfisher library for better caching and reliability
+- **Added UI tests** → Implemented automated UI testing for key flows
+- **Code cleanup** → Removed redundant code and added clarifying comments where needed
