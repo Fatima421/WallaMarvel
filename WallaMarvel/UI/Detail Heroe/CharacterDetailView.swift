@@ -55,7 +55,7 @@ struct CharacterDetailView: View {
         }
         .padding(16)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(Color.white)
+        .background(Color(.neutral))
         .clipShape(RoundedCorner(radius: 16, corners: [.topLeft, .topRight]))
     }
 }
