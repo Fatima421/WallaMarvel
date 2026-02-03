@@ -39,11 +39,13 @@ final class CharacterListViewModel: BaseViewModel {
     func handleSearchChange() {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
 
+        /// Restore previous results when clearing search
         guard !trimmed.isEmpty else {
             restoreCachedState()
             return
         }
 
+        /// Show loading only in these cases because we don't want to in case of failure or empty
         if state == .none || state == .success {
             state = .loading
         }
@@ -54,7 +56,9 @@ final class CharacterListViewModel: BaseViewModel {
     }
 
     private func performSearch() {
+        /// Save current results before searching
         cacheCurrentState()
+        /// Reset pagination for new search
         paginationState.reset()
         characters = []
 
@@ -90,11 +94,14 @@ final class CharacterListViewModel: BaseViewModel {
     }
 
     func loadMoreCharacters() async {
+        /// Prevent multiple simultaneous pagination requests
         guard !isLoadingMore, state != .loading, paginationState.canLoadMore else { return }
 
         await MainActor.run { isLoadingMore = true }
 
         await fetchCharacters()
+
+        await MainActor.run { isLoadingMore = false }
     }
 
     func refresh() async {
@@ -126,6 +133,7 @@ final class CharacterListViewModel: BaseViewModel {
         }
     }
 
+    /// Use search or regular fetch based on search text presence
     private func fetchResult(page: Int) async throws -> Characters {
         if !searchText.isEmpty {
             try await searchCharactersUseCase.execute(name: searchText, page: page)

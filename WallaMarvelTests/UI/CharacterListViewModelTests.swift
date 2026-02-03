@@ -152,7 +152,7 @@ class CharacterListViewModelTests: XCTestCase {
 
         // When
         sut.searchText = "Mickey"
-        sut.onSearchTextChanged()
+        sut.handleSearchChange()
         try? await Task.sleep(nanoseconds: 400_000_000) // debounce
         await waitForState(.success)
 
@@ -173,7 +173,7 @@ class CharacterListViewModelTests: XCTestCase {
 
         // When
         sut.searchText = ""
-        sut.onSearchTextChanged()
+        sut.handleSearchChange()
         try? await Task.sleep(nanoseconds: 400_000_000)
 
         // Then
@@ -192,7 +192,7 @@ class CharacterListViewModelTests: XCTestCase {
 
         // When
         sut.searchText = "   "
-        sut.onSearchTextChanged()
+        sut.handleSearchChange()
         try? await Task.sleep(nanoseconds: 400_000_000)
 
         // Then
@@ -214,7 +214,7 @@ class CharacterListViewModelTests: XCTestCase {
 
         // Search
         sut.searchText = "Mickey"
-        sut.onSearchTextChanged()
+        sut.handleSearchChange()
         try? await Task.sleep(nanoseconds: 400_000_000)
         await waitForState(.success)
 
@@ -222,7 +222,7 @@ class CharacterListViewModelTests: XCTestCase {
 
         // Clear
         sut.searchText = ""
-        sut.onSearchTextChanged()
+        sut.handleSearchChange()
 
         XCTAssertEqual(sut.characters, initialCharacters)
         XCTAssertEqual(sut.state, .success)
