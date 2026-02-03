@@ -1,10 +1,13 @@
 import UIKit
 
 final class ListHeroesViewController: UIViewController {
+    enum Constant {
+        static let rowHeight: CGFloat = 120
+    }
     
     // MARK: - Properties
     
-    var mainView: ListHeroesView { 
+    var mainView: ListHeroesView {
         guard let listView = view as? ListHeroesView else {
             fatalError("View is not of type ListHeroesView")
         }
@@ -71,5 +74,9 @@ extension ListHeroesViewController: UITableViewDelegate {
         guard let heroes = adapter?.heroes, indexPath.row < heroes.count else { return }
         let selectedHero = heroes[indexPath.row]
         navigateToDetail(character: selectedHero)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return Constant.rowHeight
     }
 }
