@@ -1,10 +1,3 @@
-//
-//  EmptyPlaceholder.swift
-//  Hoop
-//
-//  Created by Fatima Syed on 30/7/25.
-//
-
 import SwiftUI
 
 enum EmptyPlaceholderType {

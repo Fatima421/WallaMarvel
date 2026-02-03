@@ -13,14 +13,20 @@ struct CharacterListView: View {
                 emptyView: AnyView(emptyView),
                 errorView: AnyView(errorView)
             )
-            .navigationTitle("Disney Characters")
-            .searchable(
-                text: $viewModel.searchText,
-                isPresented: $isSearching,
-                prompt: "Search characters..."
-            )
-            .onChange(of: viewModel.searchText) {
-                viewModel.onSearchTextChanged()
+            .modify { view in
+                if viewModel.state != .failure {
+                    view
+                        .navigationTitle("Disney Characters")
+                        .searchable(
+                            text: $viewModel.searchText,
+                            isPresented: $isSearching,
+                            placement: .navigationBarDrawer(displayMode: .always),
+                            prompt: "Search characters..."
+                        )
+                        .onChange(of: viewModel.searchText) {
+                            viewModel.handleSearchChange()
+                        }
+                }
             }
         }
     }

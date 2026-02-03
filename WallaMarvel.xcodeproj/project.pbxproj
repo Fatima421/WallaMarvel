@@ -19,6 +19,8 @@
 		AD0979172F2D666800D5501A /* CharacterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0979162F2D666800D5501A /* CharacterListViewModel.swift */; };
 		AD0979192F2D676100D5501A /* CharacterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0979182F2D676100D5501A /* CharacterListView.swift */; };
 		AD09791B2F2D6C5300D5501A /* AppContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD09791A2F2D6C5300D5501A /* AppContainer.swift */; };
+		AD0F80C72F32A9C200B3F0E5 /* PaginationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F80C62F32A9C200B3F0E5 /* PaginationState.swift */; };
+		AD0F80C92F32B02700B3F0E5 /* View+.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD0F80C82F32B02700B3F0E5 /* View+.swift */; };
 		AD400BD72F31643C00F5A759 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = AD400BD62F31643C00F5A759 /* Kingfisher */; };
 		AD49409C2F2D1DA50024249A /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49409A2F2D1DA50024249A /* Characters.swift */; };
 		AD49409D2F2D1DA50024249A /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD49409B2F2D1DA50024249A /* Character.swift */; };
@@ -83,6 +85,8 @@
 		AD0979162F2D666800D5501A /* CharacterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListViewModel.swift; sourceTree = "<group>"; };
 		AD0979182F2D676100D5501A /* CharacterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterListView.swift; sourceTree = "<group>"; };
 		AD09791A2F2D6C5300D5501A /* AppContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppContainer.swift; sourceTree = "<group>"; };
+		AD0F80C62F32A9C200B3F0E5 /* PaginationState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaginationState.swift; sourceTree = "<group>"; };
+		AD0F80C82F32B02700B3F0E5 /* View+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+.swift"; sourceTree = "<group>"; };
 		AD49409A2F2D1DA50024249A /* Characters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Characters.swift; sourceTree = "<group>"; };
 		AD49409B2F2D1DA50024249A /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
 		AD49409E2F2D60EF0024249A /* GetCharacterUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetCharacterUseCase.swift; sourceTree = "<group>"; };
@@ -214,6 +218,7 @@
 				AD4940992F2D1D920024249A /* Entities */,
 				1A821ED72863081A0024D397 /* CharacterRepository.swift */,
 				1AC0347D286320F000E93178 /* UseCases */,
+				AD0F80C62F32A9C200B3F0E5 /* PaginationState.swift */,
 			);
 			path = Domain;
 			sourceTree = "<group>";
@@ -390,6 +395,7 @@
 		ADD0BAEB2F2FDA89000653ED /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				AD0F80C82F32B02700B3F0E5 /* View+.swift */,
 				ADD0BAEC2F2FDA98000653ED /* Image+.swift */,
 			);
 			path = Extensions;
@@ -591,6 +597,7 @@
 				ADD0BADA2F2FCED8000653ED /* Debouncer.swift in Sources */,
 				ADD0BADF2F2FD245000653ED /* BaseView.swift in Sources */,
 				AD0979192F2D676100D5501A /* CharacterListView.swift in Sources */,
+				AD0F80C92F32B02700B3F0E5 /* View+.swift in Sources */,
 				ADD0BACA2F2F827C000653ED /* CharacterDetailView.swift in Sources */,
 				1A7B9BBD286D81AA00EBC1A6 /* CharacterDataModel.swift in Sources */,
 				ADD0BACF2F2F8F05000653ED /* SearchCharactersUseCase.swift in Sources */,
@@ -598,6 +605,7 @@
 				ADB9BCFD2F2D0FC100E067CA /* RestManager.swift in Sources */,
 				1A821ED6286305590024D397 /* CharacterDataSource.swift in Sources */,
 				1A821ED4286302EC0024D397 /* CharactersDataModel.swift in Sources */,
+				AD0F80C72F32A9C200B3F0E5 /* PaginationState.swift in Sources */,
 				1A821EC92862FE3C0024D397 /* APIClient.swift in Sources */,
 				ADD0BAE32F2FD808000653ED /* EmptyPlaceholder.swift in Sources */,
 				ADD0BAEF2F3002B4000653ED /* RoundedCorner.swift in Sources */,

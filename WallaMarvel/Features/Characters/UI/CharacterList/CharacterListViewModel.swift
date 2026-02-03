@@ -4,18 +4,19 @@ final class CharacterListViewModel: BaseViewModel {
     // MARK: - Properties
 
     @Published var characters: [Character] = []
+    private var cachedCharacters: [Character] = []
+
     @Published var isLoadingMore = false
     @Published var searchText: String = ""
 
     private let getCharactersUseCase: GetCharactersUseCaseProtocol
     private let searchCharactersUseCase: SearchCharactersUseCaseProtocol
     private let debouncer = Debouncer(delay: 0.3)
-    private var currentPage = 1
-    private var canLoadMore = false
-    private var cachedCharacters: [Character] = []
-    private var cachedPage: Int = 1
-    private var cachedCanLoadMore: Bool = false
-    let suggestionsList: [String]
+
+    private var paginationState = PaginationState()
+    private var cachedState = PaginationState()
+
+    let suggestionsList = ["Mickey Mouse", "Barbie", "Elsa", "Simba", "Ariel", "Woody"]
 
     // MARK: - Initializer
 
@@ -26,15 +27,6 @@ final class CharacterListViewModel: BaseViewModel {
         self.getCharactersUseCase = getCharactersUseCase
         self.searchCharactersUseCase = searchCharactersUseCase
 
-        suggestionsList = [
-            "Mickey Mouse",
-            "Barbie",
-            "Elsa",
-            "Simba",
-            "Ariel",
-            "Woody"
-        ]
-
         super.init()
 
         Task {
@@ -42,15 +34,13 @@ final class CharacterListViewModel: BaseViewModel {
         }
     }
 
-    // MARK: - User actions
+    // MARK: - Search
 
-    func onSearchTextChanged() {
+    func handleSearchChange() {
         let trimmed = searchText.trimmingCharacters(in: .whitespacesAndNewlines)
+
         guard !trimmed.isEmpty else {
-            characters = cachedCharacters
-            currentPage = cachedPage
-            canLoadMore = cachedCanLoadMore
-            state = .success
+            restoreCachedState()
             return
         }
 
@@ -59,18 +49,30 @@ final class CharacterListViewModel: BaseViewModel {
         }
 
         debouncer.debounce { [weak self] in
-            self?.cachedCharacters = self?.characters ?? []
-            self?.cachedPage = self?.currentPage ?? 1
-            self?.cachedCanLoadMore = self?.canLoadMore ?? false
-
-            self?.currentPage = 1
-            self?.characters = []
-            self?.canLoadMore = false
-
-            Task {
-                await self?.loadCharacters()
-            }
+            self?.performSearch()
         }
+    }
+
+    private func performSearch() {
+        cacheCurrentState()
+        paginationState.reset()
+        characters = []
+
+        Task { await loadCharacters() }
+    }
+
+    private func cacheCurrentState() {
+        cachedState = PaginationState(
+            currentPage: paginationState.currentPage,
+            canLoadMore: paginationState.canLoadMore
+        )
+        cachedCharacters = characters
+    }
+
+    private func restoreCachedState() {
+        characters = cachedCharacters
+        paginationState = cachedState
+        state = .success
     }
 
     // MARK: - Load data
@@ -88,29 +90,33 @@ final class CharacterListViewModel: BaseViewModel {
     }
 
     func loadMoreCharacters() async {
-        guard !isLoadingMore, state != .loading, canLoadMore else { return }
+        guard !isLoadingMore, state != .loading, paginationState.canLoadMore else { return }
 
         await MainActor.run { isLoadingMore = true }
 
         await fetchCharacters()
+    }
 
-        await MainActor.run { isLoadingMore = false }
+    func refresh() async {
+        paginationState.reset()
+        await MainActor.run {
+            characters = []
+            state = .none
+        }
+
+        await loadCharacters()
     }
 
     private func fetchCharacters() async {
         do {
-            let nextPage = canLoadMore ? currentPage + 1 : currentPage
-            let result: Characters = if !searchText.isEmpty {
-                try await searchCharactersUseCase.execute(name: searchText, page: nextPage)
-            } else {
-                try await getCharactersUseCase.execute(page: nextPage)
-            }
+            let nextPage = paginationState.nextPage
+            let result: Characters = try await fetchResult(page: nextPage)
 
             await MainActor.run {
-                currentPage = nextPage
+                paginationState.currentPage = nextPage
+                paginationState.canLoadMore = result.hasNextPage
                 state = result.data.isEmpty ? .empty : .success
                 characters.append(contentsOf: result.data)
-                canLoadMore = result.hasNextPage
             }
         } catch {
             debugPrint("[ERROR] \(error.localizedDescription)")
@@ -120,13 +126,11 @@ final class CharacterListViewModel: BaseViewModel {
         }
     }
 
-    func refresh() async {
-        await MainActor.run {
-            currentPage = 1
-            characters = []
-            canLoadMore = false
-            state = .none
+    private func fetchResult(page: Int) async throws -> Characters {
+        if !searchText.isEmpty {
+            try await searchCharactersUseCase.execute(name: searchText, page: page)
+        } else {
+            try await getCharactersUseCase.execute(page: page)
         }
-        await loadCharacters()
     }
 }
