@@ -77,63 +77,13 @@ I intentionally developed two separate branches to demonstrate different technic
 
 ### `main` Branch - MVP + Clean Architecture (UIKit)
 
-```
-┌─────────────────────────────────────────────────┐
-│                  Presentation                   │
-│  ┌──────────────┐  ┌───────────┐  ┌──────────┐ │
-│  │ViewController│◄─┤ Presenter ├─►│  Adapter │ │
-│  │   (UIKit)    │  │   (MVP)   │  │(TableView)│
-│  └──────────────┘  └─────┬─────┘  └──────────┘ │
-└─────────────────────────┼──────────────────────┘
-                          │
-┌─────────────────────────┼──────────────────────┐
-│                      Domain                     │
-│                  ┌───────▼─────┐                │
-│                  │  Use Cases  │                │
-│                  │ (Business)  │                │
-│                  └───────┬─────┘                │
-└─────────────────────────┼──────────────────────┘
-                          │
-┌─────────────────────────┼──────────────────────┐
-│                       Data                      │
-│  ┌──────────┐    ┌─────▼──────┐   ┌─────────┐ │
-│  │APIClient │◄───┤ Repository │◄──┤DataSource│ │
-│  │(Network) │    │ (Protocol) │   │ (Impl)   │ │
-│  └──────────┘    └────────────┘   └─────────┘ │
-└─────────────────────────────────────────────────┘
-```
+<img width="800" height="639" alt="Screenshot 2026-02-04 at 00 44 52" src="https://github.com/user-attachments/assets/9531e95f-3b6d-4522-a6b6-a7e881fdac94" />
 
 **Flow**: View → Presenter → UseCase → Repository → DataSource → APIClient
 
 ### `new-version` Branch - MVVM + Clean Architecture (SwiftUI)
 
-```
-┌─────────────────────────────────────────────────┐
-│                  Presentation                   │
-│  ┌──────────────┐         ┌───────────────┐    │
-│  │     View     │◄────────┤  ViewModel    │    │
-│  │  (SwiftUI)   │ @Published │   (MVVM)      │    │
-│  └──────────────┘         └───────┬───────┘    │
-└─────────────────────────────────┼──────────────┘
-                                  │
-┌─────────────────────────────────┼──────────────┐
-│                      Domain                     │
-│            ┌─────────────────────▼────────┐    │
-│            │      Use Cases (async)       │    │
-│            │  - GetCharacters             │    │
-│            │  - SearchCharacters          │    │
-│            └─────────────┬────────────────┘    │
-└─────────────────────────┼──────────────────────┘
-                          │
-┌─────────────────────────┼──────────────────────┐
-│                       Data                      │
-│  ┌──────────┐    ┌─────▼──────┐   ┌─────────┐ │
-│  │APIClient │◄───┤ Repository │◄──┤DataSource│ │
-│  │(async/   │    │(async throw)│   │  (async) │ │
-│  │ await)   │    └────────────┘   └─────────┘ │
-│  └──────────┘                                  │
-└─────────────────────────────────────────────────┘
-```
+<img width="604" height="639" alt="Screenshot 2026-02-04 at 00 45 32" src="https://github.com/user-attachments/assets/ec20ce6b-04f9-4bf6-8328-b4c2bb746b70" />
 
 **Flow**: View → ViewModel → UseCase → Repository → DataSource → APIClient
 
