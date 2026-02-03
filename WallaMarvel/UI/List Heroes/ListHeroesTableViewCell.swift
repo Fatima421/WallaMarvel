@@ -51,8 +51,19 @@ final class ListHeroesTableViewCell: UITableViewCell {
     }
     
     func configure(model: CharacterDataModel) {
-        guard let imageUrl = model.thumbnail else { return }
-        heroeImageView.kf.setImage(with: URL(string: imageUrl))
         heroeName.text = model.name
+        
+        let placeholder = UIImage(named: "placeholder")
+        
+        if let imageUrl = model.thumbnail, let url = URL(string: imageUrl) {
+            heroeImageView.kf.setImage(
+                with: url,
+                placeholder: placeholder,
+                options: nil,
+                completionHandler: nil
+            )
+        } else {
+            heroeImageView.image = placeholder
+        }
     }
 }

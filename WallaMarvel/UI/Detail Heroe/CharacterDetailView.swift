@@ -20,20 +20,26 @@ struct CharacterDetailView: View {
                let url = URL(string: imageUrl),
                #available(iOS 14.0, *) {
                 KFImage(url)
+                    .placeholder {
+                        placeholder
+                    }
                     .resizable()
                     .aspectRatio(contentMode: .fill)
                     .frame(height: 350)
                     .frame(maxWidth: UIScreen.main.bounds.width)
                     .clipped()
             } else {
-                Image(systemName: "person.fill")
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                    .frame(height: 350)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.gray.opacity(0.3))
+                placeholder
             }
         }
+    }
+    
+    private var placeholder: some View {
+        Image(.placeholder)
+            .resizable()
+            .aspectRatio(contentMode: .fill)
+            .frame(height: 350)
+            .frame(maxWidth: .infinity)
     }
     
     private var informationSection: some View {
