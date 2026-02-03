@@ -23,6 +23,8 @@ final class CharacterDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = character.name
+        navigationItem.largeTitleDisplayMode = .never
         setupSwiftUIView()
     }
     
@@ -45,9 +47,6 @@ final class CharacterDetailViewController: UIViewController {
         ])
         
         hostingController.didMove(toParent: self)
-        hostingController.title = character.name
-        hostingController.navigationItem.largeTitleDisplayMode = .never
-
         self.hostingController = hostingController
     }
 }

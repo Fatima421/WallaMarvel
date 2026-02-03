@@ -1,64 +1,38 @@
 import Foundation
 
 protocol ListHeroesPresenterProtocol: AnyObject {
-    func viewDidLoad()
-    func didSelectHero(at index: Int)
-    func numberOfHeroes() -> Int
-    func hero(at index: Int) -> CharacterDataModel
+    func loadHeroes()
 }
 
 protocol ListHeroesViewProtocol: AnyObject {
     func showLoading()
     func hideLoading()
-    func showHeroes()
+    func showHeroes(_ heroes: [CharacterDataModel])
     func showError(message: String)
-    func setTitle(_ title: String)
     func navigateToDetail(character: CharacterDataModel)
 }
 
 final class ListHeroesPresenter: ListHeroesPresenterProtocol {
     weak var view: ListHeroesViewProtocol?
     private let getHeroesUseCase: GetHeroesUseCaseProtocol
-    private var heroes: [CharacterDataModel] = []
     
     init(getHeroesUseCase: GetHeroesUseCaseProtocol = GetHeroes()) {
         self.getHeroesUseCase = getHeroesUseCase
     }
     
-    func viewDidLoad() {
-        view?.setTitle("List of Heroes")
+    func loadHeroes() {
         view?.showLoading()
-        loadHeroes()
-    }
-    
-    func didSelectHero(at index: Int) {
-        guard index < heroes.count else { return }
-        let selectedHero = heroes[index]
-        view?.navigateToDetail(character: selectedHero)
-    }
-    
-    func numberOfHeroes() -> Int {
-        return heroes.count
-    }
-    
-    func hero(at index: Int) -> CharacterDataModel {
-        return heroes[index]
-    }
-    
-    // MARK: - Private Methods
-    
-    private func loadHeroes() {
         getHeroesUseCase.execute { [weak self] characterDataContainer in
             guard let self = self else { return }
             
             DispatchQueue.main.async {
-                self.heroes = characterDataContainer.characters
+                let heroes = characterDataContainer.characters
                 self.view?.hideLoading()
                 
-                if self.heroes.isEmpty {
+                if heroes.isEmpty {
                     self.view?.showError(message: "No heroes found")
                 } else {
-                    self.view?.showHeroes()
+                    self.view?.showHeroes(heroes)
                 }
             }
         }

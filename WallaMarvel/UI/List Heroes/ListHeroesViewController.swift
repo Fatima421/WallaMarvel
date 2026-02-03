@@ -6,6 +6,7 @@ final class ListHeroesViewController: UIViewController {
     
     var mainView: ListHeroesView { return view as! ListHeroesView }
     var presenter: ListHeroesPresenterProtocol?
+    private var adapter: ListHeroesAdapter?
     
     // MARK: - Lifecycle
     
@@ -15,14 +16,17 @@ final class ListHeroesViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "List of Heroes"
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .always
         setupTableView()
-        presenter?.viewDidLoad()
+        presenter?.loadHeroes()
     }
     
     // MARK: - Setup
     
     private func setupTableView() {
-        mainView.heroesTableView.dataSource = self
+        adapter = ListHeroesAdapter(tableView: mainView.heroesTableView)
         mainView.heroesTableView.delegate = self
     }
 }
@@ -38,8 +42,8 @@ extension ListHeroesViewController: ListHeroesViewProtocol {
         mainView.loadingIndicator.stopAnimating()
     }
     
-    func showHeroes() {
-        mainView.heroesTableView.reloadData()
+    func showHeroes(_ heroes: [CharacterDataModel]) {
+        adapter?.heroes = heroes
     }
     
     func showError(message: String) {
@@ -48,33 +52,9 @@ extension ListHeroesViewController: ListHeroesViewProtocol {
         present(alert, animated: true)
     }
     
-    func setTitle(_ title: String) {
-        self.title = title
-    }
-    
     func navigateToDetail(character: CharacterDataModel) {
         let detailViewController = CharacterDetailViewController(character: character)
-        //detailViewController.title = character.name
-        //detailViewController.navigationItem.largeTitleDisplayMode = .never
         navigationController?.pushViewController(detailViewController, animated: true)
-    }
-}
-
-// MARK: - UITableViewDataSource
-
-extension ListHeroesViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return presenter?.numberOfHeroes() ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ListHeroesTableViewCell", for: indexPath) as! ListHeroesTableViewCell
-        
-        if let hero = presenter?.hero(at: indexPath.row) {
-            cell.configure(model: hero)
-        }
-        
-        return cell
     }
 }
 
@@ -83,6 +63,8 @@ extension ListHeroesViewController: UITableViewDataSource {
 extension ListHeroesViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        presenter?.didSelectHero(at: indexPath.row)
+        guard let heroes = adapter?.heroes, indexPath.row < heroes.count else { return }
+        let selectedHero = heroes[indexPath.row]
+        navigateToDetail(character: selectedHero)
     }
 }
