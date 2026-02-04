@@ -1,10 +1,7 @@
 import UIKit
 
 final class ListHeroesViewController: UIViewController {
-    enum Constant {
-        static let rowHeight: CGFloat = 120
-    }
-    
+
     // MARK: - Properties
     
     var mainView: ListHeroesView {
@@ -35,7 +32,9 @@ final class ListHeroesViewController: UIViewController {
     
     private func setupTableView() {
         adapter = ListHeroesAdapter(tableView: mainView.heroesTableView)
-        mainView.heroesTableView.delegate = self
+        adapter?.onHeroSelected = { [weak self] character in
+            self?.navigateToDetail(character: character)
+        }
     }
 }
 
@@ -63,20 +62,5 @@ extension ListHeroesViewController: ListHeroesViewProtocol {
     func navigateToDetail(character: CharacterDataModel) {
         let detailViewController = CharacterDetailViewController(character: character)
         navigationController?.pushViewController(detailViewController, animated: true)
-    }
-}
-
-// MARK: - UITableViewDelegate
-
-extension ListHeroesViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard let heroes = adapter?.heroes, indexPath.row < heroes.count else { return }
-        let selectedHero = heroes[indexPath.row]
-        navigateToDetail(character: selectedHero)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return Constant.rowHeight
     }
 }
