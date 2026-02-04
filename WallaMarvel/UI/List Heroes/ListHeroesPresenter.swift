@@ -2,6 +2,7 @@ import Foundation
 
 protocol ListHeroesPresenterProtocol: AnyObject {
     func loadHeroes()
+    func didSelectHero(_ character: CharacterDataModel)
 }
 
 protocol ListHeroesViewProtocol: AnyObject {
@@ -36,5 +37,9 @@ final class ListHeroesPresenter: ListHeroesPresenterProtocol {
                 }
             }
         }
+    }
+    
+    func didSelectHero(_ character: CharacterDataModel) {
+        view?.navigateToDetail(character: character)
     }
 }

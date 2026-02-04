@@ -33,7 +33,7 @@ final class ListHeroesViewController: UIViewController {
     private func setupTableView() {
         adapter = ListHeroesAdapter(tableView: mainView.heroesTableView)
         adapter?.onHeroSelected = { [weak self] character in
-            self?.navigateToDetail(character: character)
+            self?.presenter?.didSelectHero(character)
         }
     }
 }
