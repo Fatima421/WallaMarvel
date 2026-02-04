@@ -204,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				1A821ECB2862FF990024D397 /* String+MD5.swift */,
+				AD7951642F310B730002B24A /* RoundedCorner.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -230,7 +231,6 @@
 			children = (
 				1A821EC42862FD470024D397 /* List Heroes */,
 				1A821EC52862FD500024D397 /* Detail Heroe */,
-				AD7951642F310B730002B24A /* RoundedCorner.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";

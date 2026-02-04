@@ -2,14 +2,22 @@ import SwiftUI
 import Kingfisher
 
 struct CharacterDetailView: View {
+    private enum Constants {
+        static let imageHeight: CGFloat = 350
+        static let verticalSpacing: CGFloat = 16
+        static let contentPadding: CGFloat = 16
+        static let imageOffset: CGFloat = -30
+        static let cornerRadius: CGFloat = 16
+    }
+    
     let character: CharacterDataModel
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading, spacing: 16) {
+            VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
                 heroImageView
                 informationSection
-                    .offset(y: -30)
+                    .offset(y: Constants.imageOffset)
             }
         }
     }
@@ -25,7 +33,7 @@ struct CharacterDetailView: View {
                     }
                     .resizable()
                     .aspectRatio(contentMode: .fill)
-                    .frame(height: 350)
+                    .frame(height: Constants.imageHeight)
                     .frame(maxWidth: UIScreen.main.bounds.width)
                     .clipped()
             } else {
@@ -38,12 +46,12 @@ struct CharacterDetailView: View {
         Image(.placeholder)
             .resizable()
             .aspectRatio(contentMode: .fill)
-            .frame(height: 350)
+            .frame(height: Constants.imageHeight)
             .frame(maxWidth: .infinity)
     }
     
     private var informationSection: some View {
-        VStack(alignment: .leading, spacing: 16) {
+        VStack(alignment: .leading, spacing: Constants.verticalSpacing) {
             if !character.films.isEmpty {
                 Text("Films")
                     .font(.headline)
@@ -59,9 +67,9 @@ struct CharacterDetailView: View {
                     .foregroundColor(.secondary)
             }
         }
-        .padding(16)
+        .padding(Constants.contentPadding)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.neutral))
-        .clipShape(RoundedCorner(radius: 16, corners: [.topLeft, .topRight]))
+        .clipShape(RoundedCorner(radius: Constants.cornerRadius, corners: [.topLeft, .topRight]))
     }
 }
