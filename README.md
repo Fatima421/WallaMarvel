@@ -7,6 +7,8 @@ A Disney character browsing app showing different architectural approaches and m
 This project showcases two separate approaches to building the same app:
 
 1. **`main` branch** - Refactoring and fixing existing UIKit codebase while keeping the architecture clean.
+[📖 Full Documentation](https://github.com/Fatima421/WallaMarvel/blob/main/Documentation.md)
+
 2. **`new-version` branch** - A modern SwiftUI implementation using async/await with MVVM + Clean Architecture. 
 [📖 Full Documentation](https://github.com/Fatima421/WallaMarvel/blob/new-version/Documentation.md)
 
@@ -50,6 +52,7 @@ I intentionally developed two separate branches to demonstrate different technic
 - Fix Auto Layout conflicts
 - Secure API key management
 - Integrate SwiftUI detail view into UIKit context
+- Change magic numbers in code
 
 #### `new-version` Branch - Modern Implementation
 **Goal**: Demonstrate ability to build modern iOS applications from an existing base using current best practices.
@@ -106,3 +109,10 @@ I specifically chose to implement the detail view in SwiftUI within the UIKit-ba
 1. **Practical Migration Skills**: Gradual migration from UIKit to SwiftUI is common in real projects.
 2. **Hybrid Integration**: Shows understanding of `UIHostingController` and bridging between frameworks.
 3. **Wallapop Relevance**: Given Wallapop's established codebase, demonstrates ability to integrate modern UI patterns into an existing codebase.
+
+## Technical Specifications
+
+| Branch | iOS Version | UI Framework |
+|--------|-------------|--------------|
+| `main` | iOS 13+ | UIKit + SwiftUI (Detail View) |
+| `new-version` | iOS 18+ | SwiftUI |
