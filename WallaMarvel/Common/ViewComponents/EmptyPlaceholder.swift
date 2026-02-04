@@ -55,7 +55,7 @@ struct EmptyPlaceholder: View {
                 .multilineTextAlignment(.center)
 
             type.image
-                .style(size: 150)
+                .style(size: ImageSize.medium)
                 .padding(.bottom, Spacing.small)
                 .accessibilityLabel(type.accessibilityImageLabel)
 

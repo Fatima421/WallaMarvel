@@ -36,5 +36,8 @@ struct ImageView: View {
 }
 
 #Preview {
-    ImageView(imageUrl: "https://picsum.photos/200/300", cornerRadius: 8)
+    ImageView(
+        imageUrl: "https://picsum.photos/200/300",
+        cornerRadius: CornerRadius.small
+    )
 }

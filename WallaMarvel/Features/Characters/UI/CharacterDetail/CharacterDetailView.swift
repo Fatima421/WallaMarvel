@@ -8,15 +8,15 @@ struct CharacterDetailView: View {
             VStack(alignment: .leading, spacing: Spacing.large) {
                 ImageView(
                     imageUrl: character.imageUrl,
-                    height: 350,
+                    height: ImageSize.large,
                     maxWidth: UIScreen.main.bounds.width,
-                    cornerRadius: 0
+                    cornerRadius: CornerRadius.none
                 )
                 .accessibilityElement()
                 .accessibilityLabel("Large photo of \(character.name)")
 
                 informationSection
-                    .offset(y: -30)
+                    .offset(y: ImageSize.offsetValue)
             }
         }
         .scrollIndicators(.hidden)
@@ -47,7 +47,7 @@ struct CharacterDetailView: View {
         .padding(Spacing.medium)
         .frame(maxWidth: .infinity, alignment: .leading)
         .background(Color(.neutral))
-        .clipShape(RoundedCorner(radius: 16, corners: [.topLeft, .topRight]))
+        .clipShape(RoundedCorner(radius: CornerRadius.medium, corners: [.topLeft, .topRight]))
     }
 }
 

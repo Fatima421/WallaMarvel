@@ -93,9 +93,9 @@ struct CharacterListView: View {
         HStack(alignment: .top, spacing: Spacing.medium) {
             ImageView(
                 imageUrl: character.imageUrl,
-                width: 80,
-                height: 80,
-                cornerRadius: 8
+                width: ImageSize.small,
+                height: ImageSize.small,
+                cornerRadius: CornerRadius.small
             )
 
             Text(character.name)

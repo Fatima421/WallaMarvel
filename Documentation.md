@@ -26,7 +26,7 @@ This document explains key architectural and implementation decisions made durin
 Instead of duplicating this logic per feature, I centralized it in BaseView/BaseViewModel so all views behave consistently during loading and error scenarios. This reduces boilerplate and keeps state handling predictable across the app.
 
 ### Styles and View Components
-**Why**: Spacing values are centralized in a single enum so layout changes don’t require editing multiple files.
+**Why**: Spacing, ImageSize and CornerRadius values are centralized in different enum so layout changes don’t require editing multiple files.
 I also created small reusable components (like empty placeholders and image views) to avoid repeating UI logic.
 SwiftUI was chosen to modernize the previous UIKit based implementation.
 
